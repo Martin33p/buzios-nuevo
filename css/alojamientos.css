@@ -1,0 +1,122 @@
+/* CSS/alojamientos.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 2rem;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  #contenedor-alojamientos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .tarjeta-alojamiento {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 300px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .tarjeta-alojamiento:hover {
+    transform: translateY(-5px);
+  }
+  
+  .tarjeta-alojamiento img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+  }
+  
+  .tarjeta-alojamiento h3 {
+    margin: 0;
+    color: #0077b6;
+    font-size: 1.3rem;
+  }
+  
+  .tarjeta-alojamiento p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #444;
+  }
+  
+  .tarjeta-alojamiento a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: white;
+    background-color: #0077b6;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  
+  .tarjeta-alojamiento a:hover {
+    background-color: #023e8a;
+  }
+  .imagen-alojamiento {
+    width: 100%;
+    height: 160px;
+    object-fit: cover; /* mantiene proporción sin deformar */
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  .boton-info {
+    display: block;
+    margin: 10px auto 0 auto;
+    padding: 6px 12px;
+    background-color: var(--color-boton);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: center;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+  }
+  
+  .boton-info:hover {
+    background-color: var(--color-hover-boton);
+  }
+  .filtros-alojamientos {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .filtros-alojamientos select,
+  .filtros-alojamientos button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .filtros-alojamientos select:focus,
+  .filtros-alojamientos button:hover {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  #verTodosBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }

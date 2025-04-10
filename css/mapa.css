@@ -1,0 +1,27 @@
+/* css/mapa.css */
+#map-container {
+    width: 70%;
+    height: 600px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #map {
+    width: 100%;
+    height: 100%;
+    background: url('img/mapa-de-buzios.jpg') no-repeat center center;
+    background-size: cover;
+  }
+  
+  .marker {
+    position: absolute;
+    font-size: 24px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .marker:hover {
+    transform: translate(-50%, -50%) scale(1.2);
+  }

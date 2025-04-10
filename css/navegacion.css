@@ -1,0 +1,29 @@
+/* css/navegacion.css */
+#logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: auto;
+    z-index: 1000;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  nav ul li a:hover {
+    color: var(--color-amarillo);
+  }

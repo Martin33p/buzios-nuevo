@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>World Travel Turismo - Búzios</title>
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navegacion.css">
+  <link rel="stylesheet" href="css/mapa.css">
+  <link rel="stylesheet" href="css/info-box.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/botones.css">
+  <link rel="stylesheet" href="css/resumen.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/header.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<script>
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.body.insertAdjacentHTML("beforeend", data);
+      });
+  </script>
+<body>
+
+  <!-- Header dinámico -->
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.body.insertAdjacentHTML("afterbegin", data);
+      });
+  </script>
+
+  <h1>World Travel Turismo - Búzios</h1>
+
+  <div id="map-container">
+    <img id="map" src="img/mapa-de-buzios.jpg" alt="Mapa de Búzios" />
+    <!-- Marcadores se agregan por JS -->
+  </div>
+
+  <div id="info-box"></div>
+
+   </script>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

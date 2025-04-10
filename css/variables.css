@@ -1,0 +1,14 @@
+/* css/variables.css */
+:root {
+    --color-primario: #004AAD;
+    --color-secundario: #00A86B;
+    --color-boton: #1e90ff;
+    --color-hover-boton: #0073e6;
+    --color-amarillo: #FFD700;
+    --color-amarillo-hover: #FFC107;
+    --color-card: rgb(56, 253, 12);
+    --color-card-hover: #f10909;
+    --color-texto: white;
+    --fuente-principal: Arial, sans-serif;
+    --sombra-estandar: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  }

@@ -1,0 +1,22 @@
+/* css/layout.css */
+body {
+    font-family: var(--fuente-principal);
+    text-align: center;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: var(--color-primario);
+    box-shadow: var(--sombra-estandar);
+    position: relative;
+  }
+  
+  h1 {
+    font-size: 32px;
+    margin: 30px auto;
+    color: white;
+    text-align: center;
+  }

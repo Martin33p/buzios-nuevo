@@ -1,0 +1,12 @@
+/* resumen.css */
+#resumen-compra {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+    width: 250px;
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--sombra-estandar);
+}
