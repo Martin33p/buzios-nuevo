@@ -1,11 +1,9 @@
 /* css/mapa.css */
 #map-container {
-    width: 70%;
-    height: 600px;
-    margin: 20px auto;
-    position: relative;
-    overflow: hidden;
-  }
+  position: relative;
+  z-index: 1;
+}
+
   
   #map {
     width: 100%;

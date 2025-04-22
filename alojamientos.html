@@ -3,18 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Alojamientos en Búzios</title>
-  <link rel="stylesheet" href="css/alojamientos.css">
+  <title>Alojamiento</title>
+  <link rel="stylesheet" href="/css/alojamientos.css">
 </head>
 <body>
-    <h1>Alojamientos en Búzios</h1>
-    <div id="contenedor-alojamientos"></div>
-  
-    <!-- Primero cargás PapaParse -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    
-    <!-- Luego tu script que usa PapaParse -->
-    <script src="alojamientos.js"></script> <!-- si está al lado del HTML -->
-  </body>
-  
+
+  <header id="header"></header>
+
+  <main id="contenido-alojamiento">
+    <div class="alojamiento-container">
+      <h1 id="nombre-alojamiento"></h1>
+      <div id="estrellas-alojamiento" class="estrellas"></div>
+      <p id="descripcion-alojamiento" class="descripcion"></p>
+      
+      <div class="galeria">
+        <img id="imagen-principal" src="" alt="Imagen del alojamiento" />
+        <div id="video-alojamiento" class="video-contenedor"></div>
+      </div>
+
+      <ul id="info-extra" class="info-lista"></ul>
+    </div>
+  </main>
+
+  <footer id="footer"></footer>
+
+  <!-- PapaParse -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="detalle-alojamiento.js"></script>
+
+</body>
 </html>

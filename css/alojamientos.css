@@ -1,122 +1,126 @@
-/* CSS/alojamientos.css */
+/* ===== DETALLE INDIVIDUAL DE ALOJAMIENTO ===== */
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 2rem;
+.alojamiento-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: #fffdf7;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 2rem;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  #contenedor-alojamientos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+}
+
+.alojamiento-container h1 {
+  color: #0077b6;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.estrellas {
+  margin-bottom: 1rem;
+  color: gold;
+  font-size: 1.2rem;
+}
+
+.descripcion {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* ===== GALERÍA DE IMAGEN Y VIDEO ===== */
+
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.galeria img,
+.galeria video,
+.video-contenedor iframe {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+.galeria img.loaded,
+.galeria video.loaded,
+.video-contenedor iframe.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== INFO EXTRA ===== */
+
+.info-lista {
+  list-style: none;
+  padding: 0;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.info-lista li {
+  margin-bottom: 0.5rem;
+  color: #444;
+  font-size: 0.95rem;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideIn 0.6s ease forwards;
+}
+
+.info-lista li:nth-child(1) { animation-delay: 0.2s; }
+.info-lista li:nth-child(2) { animation-delay: 0.3s; }
+.info-lista li:nth-child(3) { animation-delay: 0.4s; }
+.info-lista li:nth-child(4) { animation-delay: 0.5s; }
+.info-lista li:nth-child(5) { animation-delay: 0.6s; }
+.info-lista li:nth-child(6) { animation-delay: 0.7s; }
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
-  
-  .tarjeta-alojamiento {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    width: 300px;
-    padding: 1.5rem;
-    transition: transform 0.3s ease;
-  }
-  
-  .tarjeta-alojamiento:hover {
-    transform: translateY(-5px);
-  }
-  
-  .tarjeta-alojamiento img {
-    width: 100%;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-  }
-  
-  .tarjeta-alojamiento h3 {
-    margin: 0;
-    color: #0077b6;
-    font-size: 1.3rem;
-  }
-  
-  .tarjeta-alojamiento p {
-    margin: 0.5rem 0;
-    font-size: 0.95rem;
-    color: #444;
-  }
-  
-  .tarjeta-alojamiento a {
-    display: inline-block;
-    margin-top: 1rem;
-    color: white;
-    background-color: #0077b6;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-  }
-  
-  .tarjeta-alojamiento a:hover {
-    background-color: #023e8a;
-  }
-  .imagen-alojamiento {
-    width: 100%;
-    height: 160px;
-    object-fit: cover; /* mantiene proporción sin deformar */
-    border-radius: 10px;
-    margin-bottom: 1rem;
-  }
-  .boton-info {
-    display: block;
-    margin: 10px auto 0 auto;
-    padding: 6px 12px;
-    background-color: var(--color-boton);
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 13px;
-    text-align: center;
-    width: fit-content;
-    transition: background-color 0.3s ease;
-  }
-  
-  .boton-info:hover {
-    background-color: var(--color-hover-boton);
-  }
-  .filtros-alojamientos {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+}
+
+.info-lista li::before {
+  content: '✔';
+  color: #009739;
+  position: absolute;
+  left: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 600px) {
+  .galeria {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .filtros-alojamientos select,
-  .filtros-alojamientos button {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background: #fff;
-    cursor: pointer;
-    transition: all 0.2s ease;
+
+  .galeria img,
+  .galeria video,
+  .video-contenedor iframe {
+    max-width: 100%;
+    height: auto;
   }
-  
-  .filtros-alojamientos select:focus,
-  .filtros-alojamientos button:hover {
-    border-color: #007bff;
-    outline: none;
-  }
-  
-  #verTodosBtn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-  }
+}

@@ -21,6 +21,7 @@ var playas = [
       y: "55.4%", 
       datos: "Altura de olas: 2m | Temp: 23°C | Largo de playa: 2 km.", 
       img: "img/playa-geriba.jpg",
+      img2: "img/playa-geriba2.jpg",
       video: "videos/playa-geriba.mp4",
       link: "playas/geriba.html"
     },
@@ -30,6 +31,7 @@ var playas = [
       y: "25%", 
       datos: "Agua cristalina | Temp: 25°C | Perfecta para snorkel", 
       img: "img/playa-azeda.jpg",
+      img2: "img/playa-azeda2.jpg",
       video: "videos/playa-azeda.mp4",
       link: "playas/azeda.html"
     }

@@ -18,10 +18,11 @@ async function cargarAlojamientosCarrusel() {
   const tipoSelect = document.getElementById("tipoAlojamiento");
   const estrellasSelect = document.getElementById("categoriaEstrellas");
   const swiperWrapper = document.querySelector(".swiper-wrapper");
+  const verTodosBtn = document.getElementById("verTodosBtn");
 
   function filtrarYRenderizar() {
-    const tipoFiltro = tipoSelect.value.toLowerCase();
-    const estrellasFiltro = estrellasSelect.value;
+    const tipoFiltro = (tipoSelect?.value || "").toLowerCase();
+    const estrellasFiltro = estrellasSelect?.value || "";
 
     swiperWrapper.innerHTML = "";
 
@@ -42,27 +43,37 @@ async function cargarAlojamientosCarrusel() {
     }
 
     alojamientosFiltrados.forEach(aloj => {
+      const nombre = aloj["Nombre"] || "Nombre no disponible";
+      const tipo = aloj["Tipo de hospedaje"] || "No especificado";
+      const estrellas = aloj["Estrellas"] || "0";
+      const descripcion = aloj["Descripción"] || "Sin descripción";
       const imagen1 = aloj["Imagen1_URL"] || "https://via.placeholder.com/200x120?text=Sin+imagen";
-      const imagen2 = aloj["Imagen2_URL"] || "https://via.placeholder.com/200x120?text=Sin+imagen";
       const videoID = extraerIDYoutube(aloj["Video_URL"]);
+      const urlInfo = aloj["Más_Info_URL"];
+
+      const estrellasHTML = "⭐".repeat(parseInt(estrellas)) || "Sin estrellas";
 
       const slide = document.createElement("div");
       slide.className = "swiper-slide";
       slide.innerHTML = `
         <div class="tarjeta-alojamiento">
-          <h3>${aloj["Nombre"] || "Nombre no disponible"}</h3>
-          <p><strong>Tipo:</strong> ${aloj["Tipo de hospedaje"]}</p>
-          <p><strong>Estrellas:</strong> ${aloj["Estrellas"]}</p>
-          <p><strong>Descripción:</strong> ${aloj["Descripción"] || "Sin descripción"}</p>
-          <img src="${imagen1}" class="imagen-alojamiento" alt="Imagen 1">
-          
+          <h3>${nombre}</h3>
+          <p><strong>Tipo:</strong> ${tipo}</p>
+          <p><strong>Estrellas:</strong> ${estrellasHTML}</p>
+          <p><strong>Descripción:</strong> ${descripcion}</p>
+          <img src="${imagen1}" class="imagen-alojamiento" alt="Imagen de ${nombre}">
+
           ${videoID ? `
-            <iframe width="100%" height="160" 
+            <iframe width="100%" height="160"
               src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=0&modestbranding=1&rel=0"
               frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
             </iframe>` : ""
           }
-          <a href="${aloj["Más_Info_URL"] || "#"}" class="boton-info" target="_blank">Ver más información</a>
+
+          ${urlInfo ? `
+            <a href="${urlInfo}" class="boton-info" target="_blank">Ver más información</a>` :
+            `<button class="boton-info disabled" disabled>Sin info disponible</button>`
+          }
         </div>
       `;
       swiperWrapper.appendChild(slide);
@@ -91,14 +102,18 @@ async function cargarAlojamientosCarrusel() {
     }
   }
 
-  tipoSelect.addEventListener("change", filtrarYRenderizar);
-  estrellasSelect.addEventListener("change", filtrarYRenderizar);
-  document.getElementById("verTodosBtn").addEventListener("click", () => {
-    tipoSelect.value = "";
-    estrellasSelect.value = "";
-    filtrarYRenderizar();
-  });
-  
+  tipoSelect?.addEventListener("change", filtrarYRenderizar);
+  estrellasSelect?.addEventListener("change", filtrarYRenderizar);
+
+  if (verTodosBtn) {
+    verTodosBtn.addEventListener("click", () => {
+      if (tipoSelect) tipoSelect.value = "";
+      if (estrellasSelect) estrellasSelect.value = "";
+      filtrarYRenderizar();
+    });
+  }
+
+  filtrarYRenderizar(); // Mostrar inicialmente
 }
 
 document.addEventListener("DOMContentLoaded", cargarAlojamientosCarrusel);

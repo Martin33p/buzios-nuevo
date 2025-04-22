@@ -1,14 +1,21 @@
 footer {
-    background-color: #004AAD;
-    color: white;
-    text-align: center;
-    padding: 20px 10px;
-    margin-top: 40px;
-    font-size: 14px;
-  }
-  
-  .footer-content p {
-    margin: 5px 0;
-  }
+  background: linear-gradient(to left, #009739, #f7c600); /* Mismo degradado pero al revés */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  border-top: 3px solid #002776; /* azul bandera brasilera */
+}
 
-  
+.footer-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+main {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* si querés centrar el contenido dentro */
+}
