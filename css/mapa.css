@@ -1,25 +1,33 @@
-/* css/mapa.css */
+/* Contenedor del mapa y ficha */
 #map-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
   position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
 
-  
+/* Mapa a la izquierda */
+#map {
+  width: 70%;
+  height: 100%;
+  display: block;
+}
+
+
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  #map-container {
+    flex-direction: column;
+  }
+
   #map {
     width: 100%;
-    height: 100%;
-    background: url('img/mapa-de-buzios.jpg') no-repeat center center;
-    background-size: cover;
+    height: 50vh;
   }
-  
-  .marker {
-    position: absolute;
-    font-size: 24px;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
   }
-  
-  .marker:hover {
-    transform: translate(-50%, -50%) scale(1.2);
-  }
+ 

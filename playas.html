@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playa - Detalle</title>
+
+  <!-- Cargar estilos generales -->
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/navegacion.css" />
+  <link rel="stylesheet" href="css/info-box.css" />
+
+  <!-- Incluir Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <style>
+    /* Establecer imagen de fondo para toda la página */
+    html, body {
+      height: 100%; /* Asegura que el body tenga un alto de 100% */
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom right, rgba(0, 255, 128, 0.7), rgba(255, 204, 0, 0.7)), url('path_to_your_image.jpg'); /* Reemplaza con la URL de tu imagen */
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #333;
+      min-height: 100vh; /* Asegura que el body tenga una altura mínima de 100vh */
+    }
+
+    #info-playa {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    /* Estilo para el carrusel */
+    #imagenes-playa {
+      width: 100%;
+      margin-bottom: 30px;
+      height: 250px; /* Definir un alto fijo para el carrusel */
+    }
+
+    .swiper-container {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .swiper-slide {
+      width: 18%; /* Ancho de cada imagen en el carrusel */
+      height: 100%; /* Alto fijo para todas las imágenes */
+    }
+
+    .swiper-slide img {
+      width: 100%; /* Las imágenes ocuparán todo el ancho */
+      height: 100%; /* Las imágenes ocuparán todo el alto del carrusel */
+      border-radius: 8px;
+      object-fit: cover; /* Asegura que las imágenes se ajusten sin deformarse */
+    }
+
+    .swiper-pagination {
+      bottom: 10px;
+    }
+
+    /* Estilo para el título de la playa */
+    #playa-nombre {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2a2a2a;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Estilo para los textos y descripciones */
+    #descripcion-playa,
+    #latitud-longitud,
+    #datos-adicionales {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* Estilos para enlaces */
+    #link-hotel {
+      color: #007bff;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    #link-hotel:hover {
+      text-decoration: underline;
+    }
+
+    /* Mejorar la visualización del texto HTML */
+    #titulo-html,
+    #tex-html {
+      background-color: #f7f7f7;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Estilo para los videos */
+    #videos-playa {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    #videos-playa iframe {
+      width: 30%; /* Hacer que los videos ocupen un 30% del ancho */
+      height: 200px; /* Ajustar la altura de los videos */
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cargar encabezado dinámico -->
+  <div id="header"></div>
+
+  <!-- Contenido de la Playa -->
+  <section id="info-playa">
+    <!-- Mostrar el título HTML si existe -->
+    <div id="titulo-html"></div>
+
+    <!-- Mostrar el texto HTML adicional si existe -->
+    <div id="tex-html"></div>
+
+    <h2 id="playa-nombre"></h2> <!-- Nombre de la playa -->
+    <p id="descripcion-playa"></p> <!-- Descripción de la playa -->
+    <p id="latitud-longitud"></p> <!-- Latitud y longitud -->
+
+    <!-- Carrusel de imágenes -->
+    <div id="imagenes-playa" class="swiper-container">
+      <div class="swiper-wrapper"></div> <!-- Las imágenes se insertarán aquí -->
+      <div class="swiper-pagination"></div> <!-- Paginación para el carrusel -->
+    </div>
+
+    <div id="videos-playa"></div>
+    <div id="datos-adicionales"></div>
+    <a id="link-hotel" href="" target="_blank">Más información del hotel</a>
+
+    <!-- Mostrar datos adicionales -->
+    <div id="datos"></div>
+  </section>
+
+  <!-- Cargar footer dinámico -->
+  <div id="footer"></div>
+
+  <script>
+    // Función para cargar el header y el footer dinámicamente
+    function cargarHeaderYFooter() {
+      fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header").innerHTML = data;
+        })
+        .catch(error => console.error("Error al cargar el encabezado:", error));
+
+      fetch("footer.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.error("Error al cargar el pie de página:", error));
+    }
+
+    // Función para cargar los datos de la playa usando el ID
+    async function cargarDatosPlaya() {
+      const id = new URLSearchParams(window.location.search).get("id"); // Obtener el ID de la URL
+      console.log("ID de la playa:", id); // Verifica si el ID es correcto
+
+      const spreadsheetId = "1zB-BbVoKArPHZa5QslG9XgPXNEM97c40jRIteOu25Po";  // ID de tu Google Sheets
+      const sheetName = "Playas";  // Nombre de la hoja
+      const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
+
+      try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const json = JSON.parse(text.substring(47).slice(0, -2));  // Limpiar el JSON
+        const rows = json.table.rows;
+        console.log("Datos obtenidos de Google Sheets:", rows); // Verifica la respuesta de Google Sheets
+
+        const playa = rows.map(r => {
+          const c = r.c;
+          return {
+            id: c[0]?.v || "",
+            nombre: c[1]?.v || "",
+            lat: parseFloat(c[2]?.v) || 0,
+            lng: parseFloat(c[3]?.v) || 0,
+            descripcion: c[4]?.v || "",
+            datos: c[5]?.v || "",
+            imagenes: [c[6]?.v, c[7]?.v, c[8]?.v, c[9]?.v, c[10]?.v, c[11]?.v, c[12]?.v, c[13]?.v, c[14]?.v, c[15]?.v].filter(Boolean), // Todas las imágenes
+            videos: [c[16]?.v, c[17]?.v, c[18]?.v].filter(Boolean),
+            linkHotel: c[19]?.v || "",
+            texHTML: c[20]?.v || "",
+            tituloHTML: c[21]?.v || "",
+          };
+        }).find(p => p.id === id);
+
+        console.log("Playa seleccionada:", playa); // Verifica si encontramos la playa correcta
+
+        if (playa) {
+          mostrarInformacion(playa); // Mostrar los datos de la playa
+        } else {
+          console.error("Playa no encontrada.");
+        }
+
+      } catch (err) {
+        console.error("Error cargando datos:", err);
+      }
+    }
+
+    // Mostrar la información de la playa en el HTML
+    function mostrarInformacion(playa) {
+      console.log("Mostrar información de la playa:", playa); // Verifica los datos antes de insertarlos
+
+      // Asignar nombre de la playa
+      document.getElementById("playa-nombre").innerText = playa.nombre;
+
+      // Descripción de la playa
+      document.getElementById("descripcion-playa").innerHTML = `<p>${playa.descripcion}</p>`;
+
+      // Latitud y longitud
+      document.getElementById("latitud-longitud").innerHTML = `<p>Latitud: ${playa.lat}, Longitud: ${playa.lng}</p>`;
+
+      // Mostrar el título HTML si existe
+      if (playa.tituloHTML) {
+        document.getElementById("titulo-html").innerHTML = playa.tituloHTML;
+      }
+
+      // Mostrar el texto HTML adicional si existe
+      if (playa.texHTML) {
+        document.getElementById("tex-html").innerHTML = playa.texHTML;
+      }
+
+      // Crear el carrusel de imágenes con Swiper
+      const contenedorImagenes = document.querySelector(".swiper-wrapper");
+      playa.imagenes.forEach(img => {
+        const swiperSlide = document.createElement("div");
+        swiperSlide.classList.add("swiper-slide");
+        const imagen = document.createElement("img");
+        imagen.src = img;
+        imagen.alt = `${playa.nombre} - Imagen`;
+        imagen.classList.add("imagen-galeria");
+        swiperSlide.appendChild(imagen);
+        contenedorImagenes.appendChild(swiperSlide);
+      });
+
+      // Inicializar Swiper con más tiempo entre imágenes y mejoras de diseño
+      const swiper = new Swiper('.swiper-container', {
+        loop: true,  // Hacer que el carrusel sea infinito
+        autoplay: {
+          delay: 5000,  // El carrusel cambia cada 5 segundos (más lento)
+        },
+        slidesPerView: 5,  // Mostrar 5 imágenes al mismo tiempo
+        spaceBetween: 10,  // Espacio entre las imágenes
+        pagination: {
+          el: '.swiper-pagination',  // Paginación del carrusel
+          clickable: true,
+        },
+      });
+
+      // Mostrar videos
+      const contenedorVideos = document.getElementById("videos-playa");
+      playa.videos.forEach(video => {
+        const iframe = document.createElement("iframe");
+        iframe.width = "200"; /* Hacer los videos más pequeños */
+        iframe.height = "150"; /* Ajustar la altura */
+        iframe.src = `https://www.youtube.com/embed/${extraerIDVideo(video)}?autoplay=1&mute=1&loop=1&playlist=${extraerIDVideo(video)}&controls=1`;
+        iframe.frameBorder = "0";
+        iframe.allowFullscreen = true;
+        iframe.classList.add("video-embed");
+        contenedorVideos.appendChild(iframe);
+      });
+
+      // Datos adicionales
+      document.getElementById("datos-adicionales").innerHTML = `<p>${playa.datos}</p>`;
+
+      // Mostrar el enlace al hotel
+      const linkHotel = document.getElementById("link-hotel");
+      linkHotel.href = playa.linkHotel;
+      linkHotel.innerText = "Más información sobre el hotel";
+    }
+
+    // Función para extraer el ID del video de YouTube
+    function extraerIDVideo(url) {
+      const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+      return match ? match[1] : null;
+    }
+
+    // Cargar el header y footer cuando la página esté lista
+    window.onload = () => {
+      cargarHeaderYFooter();  // Cargar header y footer
+      cargarDatosPlaya();     // Cargar datos de la playa
+    }
+  </script>
+
+  <!-- Incluir Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,13 +1,5 @@
 /* css/navegacion.css */
-#logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 200px;
-    height: auto;
-    z-index: 1000;
-  }
-  
+
   nav ul {
     list-style: none;
     display: flex;

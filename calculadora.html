@@ -13,19 +13,19 @@
   <link rel="stylesheet" href="css/botones.css">
   <link rel="stylesheet" href="css/resumen.css">
   <link rel="stylesheet" href="css/footer.css">
-  
+    <link rel="stylesheet" href="css/header.css">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 
 <body>
-  <!-- Header dinámico -->
-  <script>
-    fetch("header.html")
-      .then(res => res.text())
-      .then(data => {
-        document.body.insertAdjacentHTML("afterbegin", data);
-      });
-  </script>
+  <!-- Logo flotante -->
+  <div class="logo-flotante">
+    <img src="./img/logo.png" alt="Logo World Travel" />
+  </div>
+
+  <!-- Header dinámico (igual que index) -->
+  <div id="header"></div>
 
   <main>
     <section id="filtros">
@@ -51,14 +51,14 @@
         <h3>Selecciona tu alojamiento</h3>
         <label for="tipoAlojamiento">Tipo:</label>
         <select id="tipoAlojamiento">
-          <option value="">Todos</option> <!-- ESTA es la clave -->
+          <option value="">Todos</option>
           <option value="hotel">Hotel</option>
           <option value="posada">Posada</option>
         </select>
 
         <label for="categoriaEstrellas">Categoría:</label>
         <select id="categoriaEstrellas">
-          <option value="">Todas</option> <!-- ESTA también -->
+          <option value="">Todas</option>
           <option value="1">1 Estrella</option>
           <option value="2">2 Estrellas</option>
           <option value="3">3 Estrellas</option>
@@ -121,8 +121,12 @@
     </div>
   </main>
 
-  <!-- Footer dinámico -->
+  <!-- Header y Footer dinámico -->
   <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
     fetch("footer.html")
       .then(res => res.text())
       .then(data => {
@@ -138,3 +142,4 @@
   <script src="alojamientosCarrusel.js" defer></script>
 </body>
 </html>
+

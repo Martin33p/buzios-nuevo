@@ -4,145 +4,31 @@ body {
   color: white;
 }
 
-/* Header completo */
-header {
-  position: relative;
-  background: linear-gradient(90deg, #009739, #FFCC29);
-  padding: 30px 30px 10px; /* espacio arriba para que el logo no tape el menú */
-  border-bottom: 4px solid #002776;
-}
-
-.header-top {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-top: 20px;
-  padding-right: 40px;
-}
-
-/* Mantenemos el tamaño del logo sin modificar */
-.logo {
-  position: absolute;
-  top: 10px;
-  left: 20px;
-  z-index: 10;
-}
-
-.logo img {
-  height: 130px; /* ajustá libremente sin miedo */
-  width: auto;
-}
-
-
-/* Ajustamos el menú para que esté más arriba */
-.menu {
-  display: flex;
-  align-items: center;
-}
-
-.menu ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.menu a:hover {
-  background-color: #002776;
-}
-
-/* TÍTULO bien pegado al header */
-.titulo-header {
-  margin-top: 30px;
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #002776;
-  text-align: center;
-}
-/* Botón hamburguesa oculto por defecto */
-.hamburguesa {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Título centrado debajo del logo+menú */
-
-button,
-.boton-info {
-  background-color: #FFCC29;
-  color: #002776;
-  font-weight: bold;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-button:hover,
-.boton-info:hover {
-  background-color: #009739;
-  color: white;
-  transform: scale(1.05);
-}
-.titulo-header {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #002776;
-}
-
-/* --- Responsive (Mobile) --- */
-@media (max-width: 768px) {
-  .header-top {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .menu ul {
-    flex-direction: column;
-    display: none;
-  }
-
-  .menu ul.mostrar {
-    display: flex;
-  }
-
-  .hamburguesa {
-    display: block;
-    font-size: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: white;
-  }
-
-  .titulo-header {
-    font-size: 1.8rem;
-    margin-top: 15px;
-  }
-}
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-
 main {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+/* Logo flotante */
+.logo-flotante {
+  position: fixed;
+  top: 7%; /* más abajo */
+  left: 180px; /* podés poner right: 20px; si lo querés a la derecha */
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.logo-flotante img {
+  height: 150px; /* más grande — vos podés poner 200px, 250px, lo que quieras */
+  display: block;
+  margin: 0;
+  padding: 0;
+  pointer-events: auto;
 }
