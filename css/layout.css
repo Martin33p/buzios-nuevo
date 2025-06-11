@@ -19,14 +19,14 @@ main {
 /* Logo flotante */
 .logo-flotante {
   position: fixed;
-  top: 7%; /* más abajo */
-  left: 180px; /* podés poner right: 20px; si lo querés a la derecha */
+  top: 0%; /* más abajo */
+  left: 200px; /* podés poner right: 20px; si lo querés a la derecha */
   z-index: 1000;
   pointer-events: auto;
 }
 
 .logo-flotante img {
-  height: 150px; /* más grande — vos podés poner 200px, 250px, lo que quieras */
+  height: 80px; /* más grande — vos podés poner 200px, 250px, lo que quieras */
   display: block;
   margin: 0;
   padding: 0;
