@@ -99,11 +99,18 @@
     #info-box a:hover {
   color: #00ffff;
 }
+/* Ocultar las imágenes del info-box en pantallas pequeñas */
+@media (max-width: 768px) {
+  .info-box img {
+    display: none;
+  }
+}
+
   </style>
 </head>
 <body>
   <div class="logo-flotante">
-  <img src="./img/Logotipo.png" alt="Logo World Travel" />
+  <img src="./imagen/Logotipo.png" alt="Logo World Travel" />
 </div>
 
   <div id="header"></div>
