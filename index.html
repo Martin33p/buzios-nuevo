@@ -195,19 +195,18 @@
     }
 
     function agregarMarcador(playa) {
-  const marker = new google.maps.Marker({
-    position: { lat: playa.lat, lng: playa.lng },
-    map,
-    title: playa.nombre,
-    icon: {
-      url: 'assets/Sombrilla.png',
-      scaledSize: new google.maps.Size(40, 40),  // Tamaño del icono
-    },
-  });
+      const marker = new google.maps.Marker({
+        position: { lat: playa.lat, lng: playa.lng },
+        map,
+        title: playa.nombre,
+        icon: {
+          url: 'assets/Sombrilla.png',
+          scaledSize: new google.maps.Size(40, 40),  // Tamaño del icono
+        },
+      });
 
-  marker.addListener("click", () => mostrarInfo(playa));
-}
-
+      marker.addListener("click", () => mostrarInfo(playa));
+    }
 
     function mostrarInfo(playa) {
       if (!infoBox) return;
