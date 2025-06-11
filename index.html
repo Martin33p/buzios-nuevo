@@ -31,87 +31,90 @@
     }
 
     #info-box {
-  position: fixed;
-  top: 40px;
-  right: 0;
-  width: 40%;
-  max-height: 720px; /* Achicamos más */
-  padding: 10px;
-  background-color: rgb(95, 102, 197);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  color: white;
-  overflow-y: auto;
-  z-index: 9999;
-  box-sizing: border-box;
-  transition: top 0.3s ease-in-out;
-  display: block;
-  height: auto;
-}
+      position: fixed;
+      top: 40px;
+      right: 0;
+      width: 40%;
+      max-height: 720px; /* Achicamos más */
+      padding: 10px;
+      background-color: rgb(95, 102, 197);
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      color: white;
+      overflow-y: auto;
+      z-index: 9999;
+      box-sizing: border-box;
+      transition: top 0.3s ease-in-out;
+      display: block;
+      height: auto;
+    }
 
     #info-box .imagenes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  }
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
     .playa-imagen {
-  width: 48%;
-  max-height: 173px; /* Antes 150px */
-  object-fit: cover;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
+      width: 48%;
+      max-height: 173px; /* Antes 150px */
+      object-fit: cover;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
 
     /* Ocultar imágenes inválidas */
     .playa-imagen[src=""],
-.playa-imagen:not([src]),
-.playa-imagen[src^="undefined"],
-.playa-imagen[src^="null"],
-.playa-imagen[src^=" "],
-.playa-imagen[src$=".undefined"] {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
+    .playa-imagen:not([src]),
+    .playa-imagen[src^="undefined"],
+    .playa-imagen[src^="null"],
+    .playa-imagen[src^=" "],
+    .playa-imagen[src$=".undefined"] {
+      display: none !important;
+      visibility: hidden !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
 
     #info-box iframe {
-  width: 100%;
-  height: 360px; /* Antes 250px */
-  margin-top: 10px;
-  border-radius: px;
-  object-fit: cover;
-}
-    #info-box a {
-  display: inline-block;
-  margin-top: px;
-  color: #00c8ff;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-    #info-box a:hover {
-  color: #00ffff;
-}
-/* Ocultar las imágenes del info-box en pantallas pequeñas */
-@media (max-width: 768px) {
-  .info-box img {
-    display: none;
-  }
-}
+      width: 100%;
+      height: 360px; /* Antes 250px */
+      margin-top: 10px;
+      border-radius: px;
+      object-fit: cover;
+    }
 
+    #info-box a {
+      display: inline-block;
+      margin-top: px;
+      color: #00c8ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    #info-box a:hover {
+      color: #00ffff;
+    }
+
+    /* Ocultar las imágenes del info-box en pantallas pequeñas */
+    @media (max-width: 768px) {
+      .info-box img {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="logo-flotante">
-  <img src="./imagen/Logotipo.png" alt="Logo World Travel" />
-</div>
+    <img src="./imagen/Logotipo.png" alt="Logo World Travel" />
+  </div>
 
   <div id="header"></div>
   <div id="map"></div>
@@ -134,7 +137,13 @@
     let playas = [];
 
     function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
+      const mapContainer = document.getElementById("map");
+      if (!mapContainer) {
+        console.error("No se encontró el contenedor del mapa.");
+        return;
+      }
+
+      map = new google.maps.Map(mapContainer, {
         center: { lat: -22.757, lng: -41.884 },
         zoom: 13,
         mapTypeId: 'satellite',
@@ -162,7 +171,7 @@
             lat: parseFloat(c[2]?.v) || 0,
             lng: parseFloat(c[3]?.v) || 0,
             descripcion: c[4]?.v || "",
-            imagenes: [c[6]?.v, c[7]?.v,].filter(v => v && v.trim() !== ""),
+            imagenes: [c[6]?.v, c[7]?.v].filter(v => v && v.trim() !== ""),
             videos: [c[16]?.v].filter(Boolean)
           };
         });
@@ -191,13 +200,15 @@
     map,
     title: playa.nombre,
     icon: {
-      url: 'assets/Sombrilla.png', // Ruta relativa desde tu index.html
-      scaledSize: new google.maps.Size(40, 40) // Ajustá tamaño a gusto
-    }
+      url: 'assets/Sombrilla.png',
+      scaledSize: new google.maps.Size(40, 40),  // Tamaño del icono
+    },
   });
 
   marker.addListener("click", () => mostrarInfo(playa));
 }
+
+
     function mostrarInfo(playa) {
       if (!infoBox) return;
 
@@ -209,14 +220,14 @@
       const video = playa.videos[0];
       const id = extraerIDVideo(video);
       const videoHtml = id
-  ? `<iframe
-       src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1"
-       frameborder="0"
-       allow="autoplay; encrypted-media"
-       allowfullscreen
-       class="playa-video"
-     ></iframe>`
-  : "";
+        ? `<iframe
+             src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1"
+             frameborder="0"
+             allow="autoplay; encrypted-media"
+             allowfullscreen
+             class="playa-video"
+           ></iframe>`
+        : "";
 
       infoBox.innerHTML = `
         <h3>${playa.nombre}</h3>
@@ -235,17 +246,18 @@
     }
 
     window.onload = () => {
-  cargarHeaderYFooter();
-  cargarDatosDesdeSheets().then(() => {
-    const joao = playas.find(p => p.nombre.toLowerCase().includes("joão fernandes"));
-    if (joao) mostrarInfo(joao);
-  });
-};
+      cargarHeaderYFooter();
+      cargarDatosDesdeSheets().then(() => {
+        const joao = playas.find(p => p.nombre.toLowerCase().includes("joão fernandes"));
+        if (joao) mostrarInfo(joao);
+      });
+    };
   </script>
 
   <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&loading=async"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&libraries=marker&v=weekly"
     async
   ></script>
+
 </body>
 </html>
