@@ -179,13 +179,13 @@
         });
 
         filtradas.forEach(playa => agregarMarcador(playa));
-
+       
         const id = new URLSearchParams(window.location.search).get("id");
         if (id) {
           const seleccionada = filtradas.find(p => p.id === id);
           if (seleccionada) mostrarInfo(seleccionada);
         }
-
+      playas.forEach(playa => agregarMarcador(playa));
       } catch (err) {
         console.error("Error cargando datos:", err);
       }
@@ -250,7 +250,7 @@
     };
   </script>
 
-  <script
+    <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&libraries=marker&v=weekly"
     async
   ></script>

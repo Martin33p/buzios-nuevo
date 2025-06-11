@@ -14,5 +14,8 @@ main {
   display: flex;
   flex-direction: column;
   flex: 1;
+  align-items: center;  /* Centra el contenido horizontalmente */
+  justify-content: center;  /* Centra el contenido verticalmente */
+  padding: 2rem;  /* Opcional, para agregar espacio alrededor del contenido */
 }
 

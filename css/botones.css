@@ -9,7 +9,7 @@
     border-radius: 8px;
 }
 
-.boton-calculadora {
+.boton-alojamiento {
     display: inline-block;
     padding: 10px 20px;
     background-color: var(--color-boton);
@@ -21,7 +21,7 @@
     transition: background 0.3s;
 }
 
-.boton-calculadora:hover {
+.boton-alojamiento:hover {
     background-color: var(--color-hover-boton);
 }
 
