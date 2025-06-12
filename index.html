@@ -2,258 +2,100 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mapa Google Maps con Playas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>index - World Travel Turismo</title>
 
-  <!-- Estilos generales -->
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/navegacion.css" />
+  <!-- Estilos CSS -->
+   <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navegacion.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/botones.css">
+  <link rel="stylesheet" href="css/resumen.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/logo.css" />
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #header, #footer {
-      width: 100%;
-    }
-
-    #map {
-      height: 100vh;
-      width: 60%;
-      float: left;
-    }
-
-    #info-box {
-      position: fixed;
-      top: 40px;
-      right: 0;
-      width: 40%;
-      max-height: 720px; /* Achicamos más */
-      padding: 10px;
-      background-color: rgb(95, 102, 197);
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-      color: white;
-      overflow-y: auto;
-      z-index: 9999;
-      box-sizing: border-box;
-      transition: top 0.3s ease-in-out;
-      display: block;
-      height: auto;
-    }
-
-    #info-box .imagenes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .playa-imagen {
-      width: 48%;
-      max-height: 173px; /* Antes 150px */
-      object-fit: cover;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    /* Ocultar imágenes inválidas */
-    .playa-imagen[src=""],
-    .playa-imagen:not([src]),
-    .playa-imagen[src^="undefined"],
-    .playa-imagen[src^="null"],
-    .playa-imagen[src^=" "],
-    .playa-imagen[src$=".undefined"] {
-      display: none !important;
-      visibility: hidden !important;
-      width: 0 !important;
-      height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    #info-box iframe {
-      width: 100%;
-      height: 360px; /* Antes 250px */
-      margin-top: 10px;
-      border-radius: px;
-      object-fit: cover;
-    }
-
-    #info-box a {
-      display: inline-block;
-      margin-top: px;
-      color: #00c8ff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    #info-box a:hover {
-      color: #00ffff;
-    }
-
-    /* Ocultar las imágenes del info-box en pantallas pequeñas */
-    @media (max-width: 768px) {
-      .info-box img {
-        display: none;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
+
 <body>
   
+  <!-- Header dinámico (igual que index) -->
   <div id="header"></div>
-  <div id="map"></div>
-  <div id="info-box">Haz clic en un marcador para ver detalles.</div>
-  <div id="footer"></div>
+ <div id="contenedor"></div>
+  <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo">
+  <h1 class="titulo">World Travel Turismo</h1>
+  <main>
+    <section id="filtros">
+      <div class="grupo">
+        <h3>Organiza el viaje de tu vida</h3>
+        <label for="fechaLlegada">Fecha de llegada:</label>
+        <input type="date" id="fechaLlegada">
 
+        <label for="fechaSalida">Fecha de salida:</label>
+        <input type="date" id="fechaSalida">
+      </div>
+
+      <div class="grupo">
+        <h3>Personas</h3>
+        <label for="adultos">Adultos:</label>
+        <input type="number" id="adultos" min="1" max="30" value="1">
+
+        <label for="menores">Menores:</label>
+        <input type="number" id="menores" min="0" max="10" value="0">
+      </div>
+
+      <div class="grupo">
+        <h3>Selecciona tu alojamiento</h3>
+        <label for="tipoAlojamiento">Tipo:</label>
+        <select id="tipoAlojamiento">
+          <option value="">Todos</option>
+          <option value="hotel">Hotel</option>
+          <option value="posada">Posada</option>
+        </select>
+
+        <label for="categoriaEstrellas">Categoría:</label>
+        <select id="categoriaEstrellas">
+          <option value="">Todas</option>
+          <option value="1">1 Estrella</option>
+          <option value="2">2 Estrellas</option>
+          <option value="3">3 Estrellas</option>
+          <option value="4">4 Estrellas</option>
+          <option value="5">5 Estrellas</option>
+        </select>
+        <button id="verTodosBtn">Ver todos</button>
+      </div>
+    </section>
+
+    <!-- Carrusel de alojamientos -->
+    <div class="swiper">
+      <div class="swiper-wrapper"></div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+    
+    
+    <!-- Header y Footer dinámico -->
   <script>
-    function cargarHeaderYFooter() {
-      fetch("header.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("header").innerHTML = data);
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
 
-      fetch("footer.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("footer").innerHTML = data);
-    }
-
-    let map;
-    let infoBox = document.getElementById("info-box");
-    let playas = [];
-
-    function initMap() {
-      const mapContainer = document.getElementById("map");
-      if (!mapContainer) {
-        console.error("No se encontró el contenedor del mapa.");
-        return;
-      }
-
-      map = new google.maps.Map(mapContainer, {
-        center: { lat: -22.757, lng: -41.884 },
-        zoom: 13,
-        mapTypeId: 'satellite',
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.body.insertAdjacentHTML("beforeend", data);
       });
-
-      cargarDatosDesdeSheets();
-    }
-
-    async function cargarDatosDesdeSheets() {
-      const spreadsheetId = "1zB-BbVoKArPHZa5QslG9XgPXNEM97c40jRIteOu25Po";
-      const sheetName = "Playas";
-      const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
-
-      try {
-        const res = await fetch(url);
-        const text = await res.text();
-        const json = JSON.parse(text.substring(47).slice(0, -2));
-        const rows = json.table.rows;
-
-        playas = rows.map(r => {
-          const c = r.c;
-          return {
-            id: c[0]?.v || "",
-            nombre: c[1]?.v || "",
-            lat: parseFloat(c[2]?.v) || 0,
-            lng: parseFloat(c[3]?.v) || 0,
-            descripcion: c[4]?.v || "",
-            imagenes: [c[6]?.v, c[7]?.v].filter(v => v && v.trim() !== ""),
-            videos: [c[16]?.v].filter(Boolean)
-          };
-        });
-
-        const filtradas = playas.filter(p => {
-          const nombre = p.nombre.toLowerCase();
-          return !["hotel", "hostel", "posada", "hospedaje", "pousada"].some(w => nombre.includes(w));
-        });
-
-        filtradas.forEach(playa => agregarMarcador(playa));
-       
-        const id = new URLSearchParams(window.location.search).get("id");
-        if (id) {
-          const seleccionada = filtradas.find(p => p.id === id);
-          if (seleccionada) mostrarInfo(seleccionada);
-        }
-      playas.forEach(playa => agregarMarcador(playa));
-      } catch (err) {
-        console.error("Error cargando datos:", err);
-      }
-    }
-
-    function agregarMarcador(playa) {
-      const marker = new google.maps.Marker({
-        position: { lat: playa.lat, lng: playa.lng },
-        map,
-        title: playa.nombre,
-        icon: {
-          url: 'assets/Sombrilla.png',
-          scaledSize: new google.maps.Size(40, 40),  // Tamaño del icono
-        },
-      });
-
-      marker.addListener("click", () => mostrarInfo(playa));
-    }
-
-    function mostrarInfo(playa) {
-      if (!infoBox) return;
-
-      const imagenes = playa.imagenes
-        .filter(img => img && img.trim() !== "")
-        .map(img => `<img src="${img}" class="playa-imagen">`)
-        .join("");
-
-      const video = playa.videos[0];
-      const id = extraerIDVideo(video);
-      const videoHtml = id
-        ? `<iframe
-             src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1"
-             frameborder="0"
-             allow="autoplay; encrypted-media"
-             allowfullscreen
-             class="playa-video"
-           ></iframe>`
-        : "";
-
-      infoBox.innerHTML = `
-        <h3>${playa.nombre}</h3>
-        <p>${playa.descripcion}</p>
-        <div class="imagenes">${imagenes}</div>
-        <div class="video">${videoHtml}</div>
-        <a href="playas.html?id=${playa.id}" target="_blank">Ver más información</a>
-      `;
-      infoBox.style.display = "block";
-      infoBox.scrollIntoView({ behavior: "smooth" });
-    }
-
-    function extraerIDVideo(url) {
-      const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
-      return match ? match[1] : null;
-    }
-
-    window.onload = () => {
-      cargarHeaderYFooter();
-      cargarDatosDesdeSheets().then(() => {
-        const joao = playas.find(p => p.nombre.toLowerCase().includes("joão fernandes"));
-        if (joao) mostrarInfo(joao);
-      });
-    };
   </script>
 
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&libraries=marker&v=weekly"
-    async
-  ></script>
-
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="script.js" defer></script>
+  <script src="alojamientos.js" defer></script>
+  <script src="alojamientosCarrusel.js" defer></script>
 </body>
 </html>
+
