@@ -6,7 +6,7 @@
   <title>index - World Travel Turismo</title>
 
   <!-- Estilos CSS -->
-   <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/navegacion.css">
   <link rel="stylesheet" href="css/tarjetas.css">
@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/logo.css" />
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 </head>
 
@@ -23,9 +22,10 @@
   
   <!-- Header dinámico (igual que index) -->
   <div id="header"></div>
- <div id="contenedor"></div>
+  <div id="contenedor"></div>
   <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo">
   <h1 class="titulo">World Travel Turismo</h1>
+
   <main>
     <section id="filtros">
       <div class="grupo">
@@ -70,14 +70,17 @@
 
     <!-- Carrusel de alojamientos -->
     <div class="swiper">
-      <div class="swiper-wrapper"></div>
+      <div class="swiper-wrapper">
+        <!-- Las tarjetas de alojamientos se generarán dinámicamente aquí -->
+      </div>
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
     
-    
-    <!-- Header y Footer dinámico -->
+  </main>
+
+  <!-- Header y Footer dinámico -->
   <script>
     fetch("header.html")
       .then(res => res.text())
@@ -96,6 +99,62 @@
   <script src="script.js" defer></script>
   <script src="alojamientos.js" defer></script>
   <script src="alojamientosCarrusel.js" defer></script>
+
+  <script>
+    // Aquí vamos a cargar los datos desde Google Sheets
+    const alojamientos = [
+      // Se obtienen desde Google Sheets dinámicamente
+    ];
+
+    // Función para cargar los datos de Google Sheets (solo ejemplo)
+function cargarAlojamientos() {
+  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv'; // Reemplaza con tu URL de Google Sheets CSV
+  fetch(sheetUrl)
+    .then(response => response.text())
+    .then(data => {
+      const rows = Papa.parse(data, {header: true}).data;
+
+      // Generamos el carrusel dinámicamente
+      const swiperWrapper = document.querySelector('.swiper-wrapper');
+      rows.forEach(alojamiento => {
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('swiper-slide');
+        tarjeta.innerHTML = `
+          <div class="tarjeta-alojamiento">
+            <img src="${alojamiento.Imagen1_URL}" alt="${alojamiento.Nombre}">
+            <h3>${alojamiento.Nombre}</h3>
+            <p>${alojamiento.Descripcion}</p>
+            
+            <!-- Nuevo botón independiente -->
+            <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(alojamiento.ID)}'">
+              Más información
+            </button>
+          </div>
+        `;
+        swiperWrapper.appendChild(tarjeta);
+      });
+
+      // Configuración de Swiper
+      const swiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    })
+    .catch(error => console.error('Error al cargar los alojamientos:', error));
+}
+
+
+
+    // Llamamos a la función para cargar los alojamientos al inicio
+    cargarAlojamientos();
+  </script>
+
 </body>
 </html>
-

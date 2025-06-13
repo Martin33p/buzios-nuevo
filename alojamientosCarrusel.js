@@ -1,8 +1,10 @@
+// Función para extraer el ID de YouTube
 function extraerIDYoutube(url) {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
   return match ? match[1] : null;
 }
 
+// Función para cargar los alojamientos en el carrusel
 async function cargarAlojamientosCarrusel() {
   const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv";
   const response = await fetch(urlCSV);
@@ -49,7 +51,6 @@ async function cargarAlojamientosCarrusel() {
       const descripcion = aloj["Descripción"] || "Sin descripción";
       const imagen1 = aloj["Imagen1_URL"] || "https://via.placeholder.com/200x120?text=Sin+imagen";
       const videoID = extraerIDYoutube(aloj["Video_URL"]);
-      const urlInfo = aloj["Más_Info_URL"];
 
       const estrellasHTML = "⭐".repeat(parseInt(estrellas)) || "Sin estrellas";
 
@@ -63,17 +64,17 @@ async function cargarAlojamientosCarrusel() {
           <p><strong>Descripción:</strong> ${descripcion}</p>
           <img src="${imagen1}" class="imagen-alojamiento" alt="Imagen de ${nombre}">
 
-          ${videoID ? `
+          ${videoID ? ` 
             <iframe width="100%" height="160"
               src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=0&modestbranding=1&rel=0"
               frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
             </iframe>` : ""
           }
 
-          ${urlInfo ? `
-            <a href="${urlInfo}" class="boton-info" target="_blank">Ver más información</a>` :
-            `<button class="boton-info disabled" disabled>Sin info disponible</button>`
-          }
+          <!-- Nuevo botón independiente "Más información" -->
+          <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(aloj.ID)}'">
+            Más información
+          </button>
         </div>
       `;
       swiperWrapper.appendChild(slide);
@@ -117,3 +118,4 @@ async function cargarAlojamientosCarrusel() {
 }
 
 document.addEventListener("DOMContentLoaded", cargarAlojamientosCarrusel);
+

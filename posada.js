@@ -1,5 +1,12 @@
+// Función para extraer el ID de YouTube
+function extraerIDYoutube(url) {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+  return match ? match[1] : null;
+}
+
+// Función para cargar los datos de la posada
 async function cargarPosada() {
-  // Obtener el parámetro ID de la URL
+  // Obtener el ID de la posada desde la URL
   const urlParams = new URLSearchParams(window.location.search);
   const posadaID = urlParams.get('id');
 

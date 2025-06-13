@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Posada - World Travel Turismo</title>
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navegacion.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/logo.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden; /* Evita el desplazamiento horizontal */
+    }
+
+    .contenedor-posada {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Estilos del carrusel */
+    .swiper-container {
+      width: 100%;  /* Aseguramos que ocupe todo el ancho de la página */
+      height: 400px;
+      margin-bottom: 20px;
+    }
+
+    .swiper-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      width: 300px;
+      height: 300px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .swiper-slide img, .swiper-slide iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .descripcion {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    /* Detalles de la posada */
+    #detalles {
+      list-style-type: none;
+      padding: 0;
+    }
+    #detalles li {
+      margin-bottom: 10px;
+    }
+
+    /* Estilo para las flechas del carrusel */
+    .swiper-button-next, .swiper-button-prev {
+      background-color: white;
+      color: black;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .swiper-button-next:hover, .swiper-button-prev:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Estilo para el modal (pantalla completa) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal img, .modal iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header dinámico -->
+  <div id="header"></div>
+
+  <div class="contenedor-posada">
+    <h1 id="nombre-posada"></h1>
+
+    <!-- Carrusel de imágenes y videos -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper" id="swiper-wrapper">
+        <!-- Las imágenes y videos se cargarán dinámicamente aquí -->
+      </div>
+      <!-- Paginación y navegación -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+
+    <div id="descripcion-posada"></div>
+    
+    <!-- Detalles de la posada -->
+    <ul id="detalles">
+      <li><strong>Tipo de hospedaje:</strong> <span id="tipo-hospedaje"></span></li>
+      <li><strong>Dirección:</strong> <span id="direccion"></span></li>
+      <li><strong>Estrellas:</strong> <span id="estrellas"></span></li>
+      <li><strong>Precio:</strong> <span id="precio"></span></li>
+      <li><strong>Dormitorios:</strong> <span id="dormitorios"></span></li>
+      <li><strong>Camas:</strong> <span id="camas"></span></li>
+      <li><strong>Check-In:</strong> <span id="checkin"></span></li>
+      <li><strong>Check-Out:</strong> <span id="checkout"></span></li>
+      <li><strong>Internet:</strong> <span id="internet"></span></li>
+      <li><strong>Aire Acondicionado:</strong> <span id="aire"></span></li>
+      <li><strong>TV:</strong> <span id="tv"></span></li>
+    </ul>
+  </div>
+
+  <!-- Modal para ver imágenes o videos en pantalla completa -->
+  <div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+      <!-- Aquí se cargará la imagen o el video en pantalla completa -->
+    </div>
+  </div>
+
+  <!-- Footer dinámico -->
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("header").innerHTML = data);
+
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.body.insertAdjacentHTML("beforeend", data);
+      });
+  </script>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // Obtener el ID de la URL
+    const params = new URLSearchParams(window.location.search);
+    const idPosada = params.get("id");
+
+    // Función para cargar los datos de la posada
+    async function cargarDatosPosada() {
+      const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
+      const response = await fetch(urlCSV);
+      const csvText = await response.text();
+
+      const parsed = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true
+      });
+
+      const alojamientos = parsed.data;
+
+      // Buscar la posada con el ID correspondiente
+      const posada = alojamientos.find(item => item.ID === idPosada);
+
+      if (posada) {
+        // Cargar los datos en la página
+        document.getElementById("nombre-posada").textContent = posada.Nombre;
+        document.getElementById("descripcion-posada").textContent = posada.Descripción;
+        document.getElementById("tipo-hospedaje").textContent = posada["Tipo de hospedaje"];
+        document.getElementById("direccion").textContent = posada.Dirección;
+        document.getElementById("estrellas").textContent = "⭐".repeat(parseInt(posada.Estrellas));
+        document.getElementById("precio").textContent = posada.Precio;
+        document.getElementById("dormitorios").textContent = posada.Dormitorios;
+        document.getElementById("camas").textContent = posada.Camas;
+        document.getElementById("checkin").textContent = posada.CheckIn;
+        document.getElementById("checkout").textContent = posada.CheckOut;
+        document.getElementById("internet").textContent = posada.Internet;
+        document.getElementById("aire").textContent = posada.Aire;
+        document.getElementById("tv").textContent = posada.TV;
+
+        // Cargar imágenes y videos en el carrusel
+        const swiperWrapper = document.getElementById("swiper-wrapper");
+
+        // Cargar imágenes (10 imágenes máximo)
+        for (let i = 1; i <= 10; i++) {
+          const imagenUrl = posada[`Imagen${i}_URL`];
+          if (imagenUrl) {
+            const slide = document.createElement('div');
+            slide.classList.add('swiper-slide');
+            slide.innerHTML = `<img src="${imagenUrl}" alt="Imagen ${i}" onclick="openModal('${imagenUrl}')">`;
+            swiperWrapper.appendChild(slide);
+          }
+        }
+
+        // Cargar videos (2 videos máximo)
+        const videoUrls = [posada.Video_URL, posada.Video_URL2];
+        videoUrls.forEach(videoUrl => {
+          if (videoUrl) {
+            const videoID = extraerIDYoutube(videoUrl);
+            if (videoID) {
+              const slide = document.createElement('div');
+              slide.classList.add('swiper-slide');
+              slide.innerHTML = `
+                <iframe width="100%" height="200" 
+                  src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=0&modestbranding=1&rel=0" 
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen onclick="openModal('${videoUrl}')">
+                </iframe>`;
+              swiperWrapper.appendChild(slide);
+            }
+          }
+        });
+
+        // Inicializar Swiper para mostrar 5 imágenes a la vez
+        const swiper = new Swiper('.swiper-container', {
+          loop: false,
+          slidesPerView: 5,
+          spaceBetween: 10,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+
+      } else {
+        document.getElementById("nombre-posada").textContent = "Posada no encontrada";
+      }
+    }
+
+    // Función para abrir el modal
+    function openModal(url) {
+      const modal = document.getElementById('myModal');
+      const modalContent = document.querySelector('.modal-content');
+      
+      if (url.includes('youtube')) {
+        modalContent.innerHTML = ` 
+          <iframe width="100%" height="100%" 
+            src="${url}?autoplay=1&mute=1&loop=1&playlist=${url}&controls=1&modestbranding=1&rel=0" 
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>`;
+      } else {
+        modalContent.innerHTML = `<img src="${url}" alt="Imagen grande">`;
+      }
+      
+      modal.style.display = 'flex';
+    }
+
+    // Función para cerrar el modal
+    document.querySelector('.close').addEventListener('click', function() {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+    });
+
+    // Cargar la información cuando el documento esté listo
+    document.addEventListener("DOMContentLoaded", cargarDatosPosada);
+
+    // Función para extraer el ID del video de YouTube
+    function extraerIDYoutube(url) {
+      const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+      return match ? match[1] : null;
+    }
+  </script>
+
+</body>
+</html>
+
