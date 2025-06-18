@@ -1,11 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
               url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
-  color: white;
+  color: rgb(64, 241, 33);
 }
 
 html, body {
-  height: 125%;
+  height: 95;
   margin: 0;
   padding: 0;
 }
@@ -17,7 +24,8 @@ main {
   align-items: center;
   justify-content: flex-start;
   padding: 1rem 2rem; /* achicamos arriba */
-  margin-top: 0px;   /* subimos todo el main un poco */
+  margin-top: 10px; /* antes capaz tenías 80px o 2rem */
+  padding-top: 0;
 }
 
 h3 {

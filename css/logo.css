@@ -1,10 +1,10 @@
 /* Logo flotante (achicar el logo) */
 .barra-fija {
   display: flex;
-  align-items: center; /* alinea verticalmente */
-  gap: 15px; /* espacio entre logo y título */
-  padding: 0px;
-  
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0; /* un poco de aire, pero poco */
+  line-height: 1;
 }
 
 .logo {
@@ -13,7 +13,8 @@
 
 .titulo {
   margin: 0;
-  font-size: 28px;
+  font-size: 26px; /* o 26px si querés un intermedio */
   color: #def62b;
+  line-height: 1.1;
 }
 
