@@ -25,7 +25,7 @@
     }
 
     #map {
-      height: 100vh;
+      height: 90vh;
       width: 60%;
       float: left;
     }
@@ -47,6 +47,7 @@
       transition: top 0.3s ease-in-out;
       display: block;
       height: auto;
+      text-align: center;
     }
 
     #info-box .imagenes {
@@ -84,24 +85,30 @@
 
     #info-box iframe {
       width: 100%;
-      height: 360px; /* Antes 250px */
+      height: 386px; /* Antes 250px */
       margin-top: 10px;
       border-radius: px;
       object-fit: cover;
     }
 
     #info-box a {
-      display: inline-block;
-      margin-top: px;
-      color: #00c8ff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #cdf763;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
 
-    #info-box a:hover {
-      color: #00ffff;
-    }
+#info-box a:hover {
+  background-color: #b5e62a;
+  color: #222;
+  transform: scale(1.05);
+}
 
     /* Ocultar las imágenes del info-box en pantallas pequeñas */
     @media (max-width: 768px) {
