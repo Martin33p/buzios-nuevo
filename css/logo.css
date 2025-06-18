@@ -1,19 +1,19 @@
 /* Logo flotante (achicar el logo) */
-.logo {
-  position: fixed; /* Fija el logo en la pantalla */
-  top: 0px; /* Ajusta la distancia desde la parte superior */
-  left: 0px; /* Ajusta la distancia desde la izquierda */
-  width: 120px; /* Ajusta el ancho del logo (puedes cambiar el valor según lo necesites) */
-  z-index: 500; /* Asegura que el logo esté encima de otros elementos */
+.barra-fija {
+  display: flex;
+  align-items: center; /* alinea verticalmente */
+  gap: 15px; /* espacio entre logo y título */
+  padding: 0px;
+  
 }
 
-/* Título flotante (cambiar la fuente) */
-.titulo {
-  position: fixed; /* Fija el título en la pantalla */
-  top: 30px; /* Ajusta la distancia desde la parte superior (debajo del logo) */
-  left: 130px; /* Ajusta la distancia desde la izquierda */
-  font-size: 2rem; /* Ajusta el tamaño del texto */
-  font-family: 'Roboto', sans-serif; /* Cambia la fuente a 'Roboto' (o la que prefieras) */
-  color: #d4ff29; /* El color que prefieras */
-  z-index: 1000; /* Asegura que el título esté encima de otros elementos */
+.logo {
+  height: 80px;
 }
+
+.titulo {
+  margin: 0;
+  font-size: 28px;
+  color: #def62b;
+}
+
