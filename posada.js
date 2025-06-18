@@ -50,7 +50,7 @@ async function cargarPosada() {
 
   if (videoID) {
     document.getElementById("video-posada").innerHTML = `
-      <iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=0&modestbranding=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     `;
   }
 

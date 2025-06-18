@@ -121,7 +121,7 @@
     height: 140px;
     border-radius: 8px;
     margin-top: 6px;
-    pointer-events: none;
+    
   }
   
   /* Tarjetas clásicas */
@@ -209,4 +209,17 @@
 
 .swiper-button-next:active, .swiper-button-prev:active {
   transform: scale(0.9); /* Efecto de presión al hacer clic */
+}
+.video-alojamiento {
+  pointer-events: auto;
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  margin-top: 10px;
+  z-index: 10;
+}
+
+/* Por si Swiper bloquea clics con overflow */
+.swiper, .swiper-slide {
+  overflow: visible !important;
 }

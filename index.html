@@ -116,34 +116,43 @@
 
     // Función para cargar los datos de Google Sheets (solo ejemplo)
 function cargarAlojamientos() {
-  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv'; // Reemplaza con tu URL de Google Sheets CSV
+  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
   fetch(sheetUrl)
     .then(response => response.text())
     .then(data => {
       const rows = Papa.parse(data, {header: true}).data;
-
-      // Generamos el carrusel dinámicamente
       const swiperWrapper = document.querySelector('.swiper-wrapper');
+
       rows.forEach(alojamiento => {
+        const videoID = extraerIDVideo(alojamiento.Video_URL || "");
+const videoIframe = videoID
+  ? `<iframe
+        src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="video-alojamiento"
+     ></iframe>`
+  : "";
+
         const tarjeta = document.createElement('div');
         tarjeta.classList.add('swiper-slide');
         tarjeta.innerHTML = `
-          <div class="tarjeta-alojamiento">
-            <img src="${alojamiento.Imagen1_URL}" alt="${alojamiento.Nombre}">
-            <h3>${alojamiento.Nombre}</h3>
-            <p>${alojamiento.Descripcion}</p>
-            
-            <!-- Nuevo botón independiente -->
-            <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(alojamiento.ID)}'">
-              Más información
-            </button>
-          </div>
-        `;
+  <div class="tarjeta-alojamiento">
+    <img src="${alojamiento.Imagen1_URL}" alt="${alojamiento.Nombre}">
+    <h3>${alojamiento.Nombre}</h3>
+    <p>${alojamiento.Descripcion}</p>
+    ${videoIframe}
+    <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(alojamiento.ID)}'">
+      Más información
+    </button>
+  </div>
+`;
+
         swiperWrapper.appendChild(tarjeta);
       });
 
-      // Configuración de Swiper
-      const swiper = new Swiper('.swiper', {
+      new Swiper('.swiper', {
         loop: true,
         pagination: {
           el: '.swiper-pagination',
@@ -158,11 +167,12 @@ function cargarAlojamientos() {
     .catch(error => console.error('Error al cargar los alojamientos:', error));
 }
 
-
-
-    // Llamamos a la función para cargar los alojamientos al inicio
-    cargarAlojamientos();
-  </script>
+function extraerIDVideo(url) {
+  const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+  return match ? match[1] : null;
+}
+cargarAlojamientos();
+</script>
 
 </body>
 </html>
