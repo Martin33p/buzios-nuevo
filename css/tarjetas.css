@@ -56,9 +56,11 @@
   
   /* Tarjetas de carrusel Swiper */
   .swiper {
-    width: 100%;
-    padding: 2rem 0;
-  } 
+  padding: 20px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
   .swiper-slide {
     background: transparent;
     box-shadow: none; /* eliminamos sombra si la tiene */

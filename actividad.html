@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actividad - World Travel Turismo</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    .actividad-container {
+      max-width: 2000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #ffffff00;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .media-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .media-item {
+      background: #e5f5093c;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      max-width: 280px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .media-item img,
+    .media-item iframe {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 0.7rem;
+      border: none;
+      cursor: pointer;
+    }
+    .media-item p {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    /* Estilo visor pantalla completa */
+    #visor-imagen {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #visor-imagen img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px black;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="actividad-container">
+    <h1 id="titulo-html"></h1>
+    <h2 id="nombre"></h2>
+    <p id="datos"></p>
+    <p><strong>Duración:</strong> <span id="duracion"></span></p>
+    <p><strong>Precio:</strong> <span id="precio"></span></p>
+
+    <div class="media-grid" id="galeria-img"></div>
+    <div class="media-grid" id="galeria-videos"></div>
+  </main>
+
+  <div id="visor-imagen" onclick="cerrarVisor()">
+    <img id="imagen-grande" src="" alt="Imagen ampliada" />
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script>
+    fetch("header.html").then(res => res.text()).then(data => {
+      document.getElementById("header").innerHTML = data;
+    });
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+    });
+
+    function extraerIDYoutube(url) {
+      const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+      return match ? match[1] : null;
+    }
+
+    function abrirImagen(src) {
+      const visor = document.getElementById("visor-imagen");
+      const imagen = document.getElementById("imagen-grande");
+      imagen.src = src;
+      visor.style.display = "flex";
+    }
+
+    function cerrarVisor() {
+      document.getElementById("visor-imagen").style.display = "none";
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const actividadID = params.get("id");
+    const url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=1341822128&single=true&output=csv";
+
+    fetch(url)
+      .then(res => res.text())
+      .then(csv => {
+        const data = Papa.parse(csv, { header: true }).data;
+        const act = data.find(a => a.ID === actividadID);
+        if (!act) return;
+
+        document.getElementById("titulo-html").innerText = act["Titulo HTML"] || "Actividad";
+        document.getElementById("nombre").innerText = act.Nombre;
+        document.getElementById("datos").innerText = act.Datos;
+        document.getElementById("duracion").innerText = act.Duracion;
+        document.getElementById("precio").innerText = act.Precio;
+
+        const galeriaImg = document.getElementById("galeria-img");
+        for (let i = 1; i <= 10; i++) {
+          const imgURL = act[`Img${i}`];
+          const desc = act[`Descripción ${i}`];
+          if (imgURL) {
+            const div = document.createElement("div");
+            div.classList.add("media-item");
+            div.innerHTML = `<img src="${imgURL}" alt="${desc || ''}" onclick="abrirImagen('${imgURL}')"><p>${desc || ''}</p>`;
+            galeriaImg.appendChild(div);
+          }
+        }
+
+        const galeriaVid = document.getElementById("galeria-videos");
+        for (let i = 1; i <= 3; i++) {
+          const vidURL = act[`Video ${i}`];
+          const desc = act[`Descripción video ${i}`];
+          const id = extraerIDYoutube(vidURL);
+          if (id) {
+            const div = document.createElement("div");
+            div.classList.add("media-item");
+            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?controls=1&rel=0" allowfullscreen></iframe><p>${desc || ''}</p>`;
+            galeriaVid.appendChild(div);
+          }
+        }
+      });
+  </script>
+</body>
+</html>
+

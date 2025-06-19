@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actividades - World Travel Turismo</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/navegacion.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/botones.css">
+  <link rel="stylesheet" href="css/resumen.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/logo.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <main>
+    <h1 class="titulo">Actividades</h1>
+
+    <!-- Carrusel de actividades -->
+    <div class="swiper">
+      <div class="swiper-wrapper" id="actividad-carrusel">
+        <!-- Se cargan dinámicamente -->
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script>
+    // Carga dinámica header y footer
+    fetch("header.html").then(res => res.text()).then(data => {
+      document.getElementById("header").innerHTML = data;
+    });
+    fetch("footer.html").then(res => res.text()).then(data => {
+      document.getElementById("footer").innerHTML = data;
+    });
+
+    const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=1341822128&single=true&output=csv";
+
+    fetch(sheetUrl)
+      .then(res => res.text())
+      .then(csv => {
+        const data = Papa.parse(csv, { header: true }).data;
+        const contenedor = document.getElementById("actividad-carrusel");
+
+        data.forEach(act => {
+          const videoID = extraerIDYoutube(act["Video 1"]);
+          const videoHTML = videoID ? `<iframe src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>` : "";
+
+          const tarjeta = document.createElement("div");
+          tarjeta.classList.add("swiper-slide");
+          tarjeta.innerHTML = `
+            <div class="tarjeta-alojamiento">
+              <img src="${act.Img1}" alt="Imagen de ${act.Nombre}">
+              <h3>${act.Nombre}</h3>
+              <p>${act["Descripción 1"] || ""}</p>
+              ${videoHTML}
+              <button class="mas-info-boton" onclick="location.href='actividad.html?id=${act.ID}'">
+                Más información
+              </button>
+            </div>
+          `;
+          contenedor.appendChild(tarjeta);
+        });
+
+         new Swiper('.swiper', {
+          loop: true,
+          slidesPerView: 5,
+          spaceBetween: 20,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            0: {
+              slidesPerView: 1
+            },
+            576: {
+              slidesPerView: 2
+            },
+            768: {
+              slidesPerView: 3
+            },
+            992: {
+              slidesPerView: 4
+            },
+            1200: {
+              slidesPerView: 5
+            }
+          }
+        }); // <- CIERRE CORRECTO
+
+      }); // <- Cierre del .then()
+
+      function extraerIDYoutube(url) {
+        const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+        return match ? match[1] : null;
+      }
+  </script>
+</body>
+</html>
