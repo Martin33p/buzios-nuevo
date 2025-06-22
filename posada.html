@@ -352,18 +352,21 @@
         const videos = document.getElementById("videos");
         const videoUrls = [posada.Video_URL, posada.Video_URL2];
         videoUrls.forEach(videoUrl => {
-          if (videoUrl) {
-            const videoID = extraerIDYoutube(videoUrl);
-            if (videoID) {
-              const iframe = document.createElement('iframe');
-              iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
-              iframe.allow = "autoplay; encrypted-media";
-              iframe.frameborder = "0";
-              iframe.allowfullscreen = true;
-              videos.appendChild(iframe);
-            }
-          }
-        });
+  if (videoUrl) {
+    const videoID = extraerIDYoutube(videoUrl);
+    if (videoID) {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
+      
+      // Añadir permisos adecuados para el iframe
+      iframe.allow = "autoplay; encrypted-media; fullscreen"; // Asegura que fullscreen esté habilitado
+      iframe.frameborder = "0";
+      iframe.allowfullscreen = true; // Este atributo es esencial para permitir la pantalla completa
+      
+      videos.appendChild(iframe);
+    }
+  }
+});
       } else {
         document.getElementById("nombre-posada").textContent = "Posada no encontrada";
       }

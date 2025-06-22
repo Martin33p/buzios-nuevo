@@ -129,7 +129,7 @@ const videoIframe = videoID
   ? `<iframe
         src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0"
         frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"; fullscreen" /* Asegúrate de que 'fullscreen' esté permitido */
         allowfullscreen
         class="video-alojamiento"
      ></iframe>`
