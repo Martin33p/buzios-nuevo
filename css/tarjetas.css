@@ -1,42 +1,3 @@
-/* Reset global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Estilo general para el body */
-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-              url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
-  color: rgb(64, 241, 33);
-}
-
-/* Ajustes de altura de la página */
-html, body {
-  height: 95%;
-  margin: 0;
-  padding: 0;
-}
-
-/* Estilos para el main */
-main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1rem 2rem;
-  margin-top: 10px;
-}
-
-/* Título general */
-h3 {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
 /* Estilos para las tarjetas verticales */
 .tarjeta-vertical {
   background: linear-gradient(135deg, #ffffff, #f0f8ff);
@@ -186,29 +147,11 @@ h3 {
   background-color: #45a049;
 }
 
-/* Estilos para el carrusel y swiper */
-.swiper-container {
-  width: 100%;
-  height: 400px;
-  margin-bottom: 20px;
-  padding-top: 40px;
-   overflow: hidden; /* Asegura que el carrusel no se desborde */
-}
 
 .filtros {
   margin-bottom: 40px;
 }
 
-.swiper {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  padding: 0 10px;
-  width: 100%;
-  overflow: hidden;
-  max-width: 100%;
-  margin-top: 40px;
-}
 
 .grupo {
   display: flex;
@@ -223,81 +166,6 @@ h3 {
   width: 100%;
 }
 
-.swiper-wrapper {
-  display: flex;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.swiper-slide {
-  width: 19.5%;
-  margin: 0 10px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-/* Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  .swiper-slide {
-    width: 100%; /* Solo 1 imagen a la vez en pantallas pequeñas */
-    margin: 10px 0;
-  }
-
-  .swiper-container {
-    height: 300px; /* Ajusta la altura del carrusel en pantallas pequeñas */
-  }
-}
-
-/* Asegura que el carrusel no se desborde horizontalmente */
-.swiper {
-  overflow-x: hidden;
-}
-
-/* Estilos para la paginación de Swiper */
-.swiper-pagination {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 10;
-}
-
-/* Estilo para las flechas del carrusel */
-.swiper-button-next,
-.swiper-button-prev {
-  background-color: white;
-  color: black;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  font-size: 18px;
-  border: 2px solid #ddd;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 18px;
-  font-weight: normal;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.1);
-}
-
-.swiper-button-next:active,
-.swiper-button-prev:active {
-  transform: scale(0.9);
-}
 
 /* Video con loop visualmente correcto */
 .video-alojamiento {
@@ -309,7 +177,3 @@ h3 {
   z-index: 10;
 }
 
-.swiper,
-.swiper-slide {
-  overflow: visible !important;
-}

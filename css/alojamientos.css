@@ -124,3 +124,145 @@
     height: auto;
   }
 }
+
+/* ===== CARRUSEL - SOLUCIÓN PARA EL DESBORDAMIENTO ===== */
+
+/* Carrusel de imágenes */
+#carrusel-imagenes {
+  display: flex;
+  overflow-x: hidden;  /* Evita el desbordamiento horizontal */
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center; /* Centra el carrusel */
+}
+
+#carrusel-imagenes img {
+  width: 100%;
+  max-width: 300px; /* Limita el ancho de cada imagen */
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0; /* Evita que las imágenes se reduzcan */
+}
+
+/* Estilos para el carrusel y swiper */
+.swiper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0 10px;
+  width: 100%;
+  overflow: hidden;  /* Asegura que no se muestren más imágenes fuera del contenedor */
+  max-width: 100%;
+  margin-top: 40px;
+}
+
+.swiper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0 10px;
+  width: 100%;
+  max-width: 100%; /* Asegura que el carrusel no se desborde */
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+.swiper-wrapper {
+  display: flex;
+  width: 100%; /* Permite que el contenido se ajuste automáticamente */
+  box-sizing: border-box;
+}
+
+.swiper-slide {
+  width: 19.5%;  /* Asegura que solo se muestren 5 imágenes por vez */
+  margin: 0 10px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Ajuste para que el carrusel no se desborde */
+.swiper-container {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 100%; /* Solo 1 imagen visible a la vez en pantallas pequeñas */
+    margin: 10px 0;
+  }
+
+  .swiper-container {
+    height: 300px; /* Ajusta la altura en pantallas pequeñas */
+  }
+}
+
+/* Asegura que el carrusel no se desborde horizontalmente */
+.swiper {
+  overflow-x: hidden;
+}
+
+/* Estilos para la paginación de Swiper */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Estilo para las flechas del carrusel */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white;
+  color: black;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  font-size: 18px;
+  border: 2px solid #ddd;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1);
+}
+
+.swiper-button-next:active,
+.swiper-button-prev:active {
+  transform: scale(0.9);
+}
+
+/* Video con loop visualmente correcto */
+.video-alojamiento {
+  pointer-events: auto;
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  margin-top: 10px;
+  z-index: 10;
+}
+
+.swiper-slide {
+  width: 19.5%;  /* Asegura que solo se muestren 5 imágenes por vez */
+  margin: 0 10px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
