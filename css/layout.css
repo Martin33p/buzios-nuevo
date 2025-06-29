@@ -81,7 +81,7 @@ h3 {
   right: 0;
   background-color: #fff;
   width: 300px;
-  height: calc(95vh - 90px); /* Ajustamos para que ocupe el espacio restante hasta el footer */
+  height: calc(100vh - 100px); /* Ajustamos para que ocupe el espacio restante hasta el footer */
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
   padding: 20px;
   z-index: 10;
