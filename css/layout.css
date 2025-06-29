@@ -1,45 +1,50 @@
+/* Reset global */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
+/* Estilo general para el body */
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
               url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
   color: rgb(64, 241, 33);
 }
 
+/* Ajustes de altura de la página */
 html, body {
-  height: 95;
+  height: 95%;
   margin: 0;
   padding: 0;
 }
 
+/* Estilos para el main */
 main {
   display: flex;
   flex-direction: column;
   flex: 1;
   align-items: center;
   justify-content: flex-start;
-  padding: 1rem 2rem; /* achicamos arriba */
-  margin-top: 10px; /* antes capaz tenías 80px o 2rem */
-  padding-top: 0;
+  padding: 1rem 2rem;
+  margin-top: 10px;
 }
 
+/* Título general */
 h3 {
-  font-size: 1.8rem; /* antes debe estar en 1.2 o 1.5 */
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
+
+/* Estilos para la visualización de elementos en formato de tarjeta */
 .media-item {
   flex: 1 1 300px;
   max-width: 320px;
   text-align: center;
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin: 1rem;
   overflow: hidden;
   display: flex;
@@ -60,9 +65,149 @@ h3 {
   color: #333;
 }
 
+/* Estilo de la cuadrícula */
 .media-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+}
+
+/* Filtros */
+#filtros-contenido {
+  display: none;
+  position: fixed;  /* Cambiado a fixed para que quede fijo en la pantalla */
+  top: 100px; /* Ajustamos para que esté justo debajo del botón */
+  right: 0;
+  background-color: #fff;
+  width: 300px;
+  height: calc(90vh - 90px); /* Ajustamos para que ocupe el espacio restante hasta el footer */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 10;
+  overflow-y: auto;
+}
+
+#filtros-contenido.active {
+  display: block;
+}
+
+/* Botón para mostrar/ocultar filtros */
+/* Estilo para el botón Filtros */
+.btn-filtros {
+  position: fixed;
+  top: 50px; /* Ajusta el valor aquí para mover el botón hacia abajo */
+  right: 20px;
+  background-color: #0077cc;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 15;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-filtros:hover {
+  background-color: #005fa3;
+  transform: scale(1.05);
+}
+
+.btn-filtros:focus {
+  outline: none;
+}
+
+/* Título de los filtros */
+#titulo-filtros {
+  text-align: center;
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+/* Estilo para los filtros */
+#filtros {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Limitar el ancho de los campos */
+.grupo input,
+.grupo select {
+  width: 200px;
+  padding: 2px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.grupo label {
+  font-size: 20px;
+}
+
+/* Estilos generales para los campos de formulario */
+.grupo button {
+  background-color: #0077cc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.grupo button:hover {
+  background-color: #005fa3;
+}
+
+/* Carrusel */
+.swiper-container {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+  padding-top: 40px;
+}
+
+.swiper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding: 0 10px;
+  width: 100%;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.swiper-wrapper {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swiper-slide {
+  width: 19.5%;
+  margin: 0 10px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Media query para la responsividad */
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  #filtros-contenido {
+    width: 80%;
+  }
+  .swiper-container {
+    height: 300px;
+  }
 }

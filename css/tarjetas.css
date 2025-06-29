@@ -1,4 +1,43 @@
-/* Tarjeta vertical estilo snorkel */
+/* Reset global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo general para el body */
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+              url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
+  color: rgb(64, 241, 33);
+}
+
+/* Ajustes de altura de la página */
+html, body {
+  height: 95%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para el main */
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem 2rem;
+  margin-top: 10px;
+}
+
+/* Título general */
+h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para las tarjetas verticales */
 .tarjeta-vertical {
   background: linear-gradient(135deg, #ffffff, #f0f8ff);
   border: 2px solid #cde1ff;
@@ -35,7 +74,7 @@
   color: #333;
 }
 
-/* Botón con estilo snorkel, centrado */
+/* Estilos para el botón con estilo snorkel */
 .boton-info {
   display: inline-block;
   margin-top: 10px;
@@ -53,7 +92,7 @@
   background-color: #005fa3;
 }
 
-/* Tarjeta de alojamiento */
+/* Estilos para la tarjeta de alojamiento */
 .tarjeta-alojamiento {
   background: #e5f5093c;
   border-radius: 1rem;
@@ -82,7 +121,6 @@
   text-align: left;
 }
 
-/* Imágenes */
 .tarjeta-alojamiento img,
 .tarjeta-alojamiento img.imagen-alojamiento {
   width: 100%;
@@ -92,7 +130,6 @@
   margin-bottom: 6px;
 }
 
-/* Video con loop visualmente correcto */
 .tarjeta-alojamiento iframe {
   width: 100%;
   height: 140px;
@@ -100,7 +137,7 @@
   margin-top: 6px;
 }
 
-/* Tarjetas clásicas */
+/* Estilos para las tarjetas clásicas */
 .card {
   background: var(--color-card);
   color: black;
@@ -119,7 +156,7 @@
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Tarjetas de promociones */
+/* Estilos para las tarjetas de promociones */
 .tarjeta-oferta {
   background: var(--color-card);
   color: black;
@@ -149,11 +186,17 @@
   background-color: #45a049;
 }
 
-/* Carrusel y swiper */
+/* Estilos para el carrusel y swiper */
 .swiper-container {
   width: 100%;
   height: 400px;
   margin-bottom: 20px;
+  padding-top: 40px;
+   overflow: hidden; /* Asegura que el carrusel no se desborde */
+}
+
+.filtros {
+  margin-bottom: 40px;
 }
 
 .swiper {
@@ -164,6 +207,20 @@
   width: 100%;
   overflow: hidden;
   max-width: 100%;
+  margin-top: 40px;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 0;
+}
+
+.grupo label,
+.grupo input {
+  display: block;
+  width: 100%;
 }
 
 .swiper-wrapper {
@@ -180,10 +237,15 @@
   overflow: hidden;
 }
 
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 768px) {
   .swiper-slide {
-    width: 100%;
+    width: 100%; /* Solo 1 imagen a la vez en pantallas pequeñas */
     margin: 10px 0;
+  }
+
+  .swiper-container {
+    height: 300px; /* Ajusta la altura del carrusel en pantallas pequeñas */
   }
 }
 
@@ -237,6 +299,7 @@
   transform: scale(0.9);
 }
 
+/* Video con loop visualmente correcto */
 .video-alojamiento {
   pointer-events: auto;
   width: 100%;

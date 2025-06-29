@@ -19,61 +19,63 @@
 </head>
 
 <body>
-  
+
   <!-- Header dinámico (igual que index) -->
   <div id="header"></div>
   <div id="contenedor"></div>
   <div class="barra-fija">
-  <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo" />
-  <h1 class="titulo">Alojamientos</h1>
-</div>
+    <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo" />
+    <h1 class="titulo">Alojamientos</h1>
+  </div>
 
   <main>
-    
-    <section id="filtros">
-      <!-- Aquí vienen los filtros -->
-    </section>
+    <!-- Botón para mostrar/ocultar filtros -->
+    <button id="toggle-filters" aria-label="Mostrar/Ocultar filtros" class="btn-filtros">
+  Filtros
+</button>
+  <h2 id="titulo-filtros">Organiza el viaje de tu vida</h2>
+    <!-- Filtros ocultos -->
+    <section id="filtros-contenido">
+      <section id="filtros">
+        <div class="grupo">
+          
+          <label for="fechaLlegada">Fecha de llegada:</label>
+          <input type="date" id="fechaLlegada">
 
-    <div id="contenedor"></div>
-    <section id="filtros">
-      <div class="grupo">
-        <h3>Organiza el viaje de tu vida</h3>
-        <label for="fechaLlegada">Fecha de llegada:</label>
-        <input type="date" id="fechaLlegada">
+          <label for="fechaSalida">Fecha de salida:</label>
+          <input type="date" id="fechaSalida">
+        </div>
 
-        <label for="fechaSalida">Fecha de salida:</label>
-        <input type="date" id="fechaSalida">
-      </div>
+        <div class="grupo">
+          <h3>Personas</h3>
+          <label for="adultos">Adultos:</label>
+          <input type="number" id="adultos" min="1" max="30" value="1">
 
-      <div class="grupo">
-        <h3>Personas</h3>
-        <label for="adultos">Adultos:</label>
-        <input type="number" id="adultos" min="1" max="30" value="1">
+          <label for="menores">Menores:</label>
+          <input type="number" id="menores" min="0" max="10" value="0">
+        </div>
 
-        <label for="menores">Menores:</label>
-        <input type="number" id="menores" min="0" max="10" value="0">
-      </div>
+        <div class="grupo">
+          <h3>Selecciona tu alojamiento</h3>
+          <label for="tipoAlojamiento">Tipo:</label>
+          <select id="tipoAlojamiento">
+            <option value="">Todos</option>
+            <option value="hotel">Hotel</option>
+            <option value="posada">Posada</option>
+          </select>
 
-      <div class="grupo">
-        <h3>Selecciona tu alojamiento</h3>
-        <label for="tipoAlojamiento">Tipo:</label>
-        <select id="tipoAlojamiento">
-          <option value="">Todos</option>
-          <option value="hotel">Hotel</option>
-          <option value="posada">Posada</option>
-        </select>
-
-        <label for="categoriaEstrellas">Categoría:</label>
-        <select id="categoriaEstrellas">
-          <option value="">Todas</option>
-          <option value="1">1 Estrella</option>
-          <option value="2">2 Estrellas</option>
-          <option value="3">3 Estrellas</option>
-          <option value="4">4 Estrellas</option>
-          <option value="5">5 Estrellas</option>
-        </select>
-        <button id="verTodosBtn">Ver todos</button>
-      </div>
+          <label for="categoriaEstrellas">Categoría:</label>
+          <select id="categoriaEstrellas">
+            <option value="">Todas</option>
+            <option value="1">1 Estrella</option>
+            <option value="2">2 Estrellas</option>
+            <option value="3">3 Estrellas</option>
+            <option value="4">4 Estrellas</option>
+            <option value="5">5 Estrellas</option>
+          </select>
+          <button id="verTodosBtn">Ver todos</button>
+        </div>
+      </section>
     </section>
 
     <!-- Carrusel de alojamientos -->
@@ -85,7 +87,6 @@
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
-    
   </main>
 
   <!-- Header y Footer dinámico -->
@@ -115,64 +116,73 @@
     ];
 
     // Función para cargar los datos de Google Sheets (solo ejemplo)
-function cargarAlojamientos() {
-  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
-  fetch(sheetUrl)
-    .then(response => response.text())
-    .then(data => {
-      const rows = Papa.parse(data, {header: true}).data;
-      const swiperWrapper = document.querySelector('.swiper-wrapper');
+    function cargarAlojamientos() {
+      const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
+      fetch(sheetUrl)
+        .then(response => response.text())
+        .then(data => {
+          const rows = Papa.parse(data, {header: true}).data;
+          const swiperWrapper = document.querySelector('.swiper-wrapper');
 
-      rows.forEach(alojamiento => {
-        const videoID = extraerIDVideo(alojamiento.Video_URL || "");
-const videoIframe = videoID
-  ? `<iframe
-        src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"; fullscreen" /* Asegúrate de que 'fullscreen' esté permitido */
-        allowfullscreen
-        class="video-alojamiento"
-     ></iframe>`
-  : "";
+          rows.forEach(alojamiento => {
+            const videoID = extraerIDVideo(alojamiento.Video_URL || "");
+            const videoIframe = videoID
+              ? `<iframe
+                    src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"; fullscreen"
+                    allowfullscreen
+                    class="video-alojamiento"
+                 ></iframe>` 
+              : "";
 
-        const tarjeta = document.createElement('div');
-        tarjeta.classList.add('swiper-slide');
-        tarjeta.innerHTML = `
-  <div class="tarjeta-alojamiento">
-    <img src="${alojamiento.Imagen1_URL}" alt="${alojamiento.Nombre}">
-    <h3>${alojamiento.Nombre}</h3>
-    <p>${alojamiento.Descripcion}</p>
-    ${videoIframe}
-    <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(alojamiento.ID)}'">
-      Más información
-    </button>
-  </div>
-`;
+            const tarjeta = document.createElement('div');
+            tarjeta.classList.add('swiper-slide');
+            tarjeta.innerHTML = `
+              <div class="tarjeta-alojamiento">
+                <img src="${alojamiento.Imagen1_URL}" alt="${alojamiento.Nombre}">
+                <h3>${alojamiento.Nombre}</h3>
+                <p>${alojamiento.Descripcion}</p>
+                ${videoIframe}
+                <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(alojamiento.ID)}'">
+                  Más información
+                </button>
+              </div>
+            `;
+            swiperWrapper.appendChild(tarjeta);
+          });
 
-        swiperWrapper.appendChild(tarjeta);
-      });
+          new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true,
+            },
+            navigation: {
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev',
+            },
+          });
+        })
+        .catch(error => console.error('Error al cargar los alojamientos:', error));
+    }
 
-      new Swiper('.swiper', {
-        loop: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-      });
-    })
-    .catch(error => console.error('Error al cargar los alojamientos:', error));
-}
+    function extraerIDVideo(url) {
+      const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+      return match ? match[1] : null;
+    }
+    cargarAlojamientos();
+  </script>
 
-function extraerIDVideo(url) {
-  const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
-  return match ? match[1] : null;
-}
-cargarAlojamientos();
-</script>
+  <!-- Script para mostrar/ocultar filtros -->
+  <script>
+    const toggleButton = document.getElementById('toggle-filters');
+    const filtrosContenido = document.getElementById('filtros-contenido');
+
+    toggleButton.addEventListener('click', () => {
+      filtrosContenido.classList.toggle('active');
+    });
+  </script>
 
 </body>
 </html>
