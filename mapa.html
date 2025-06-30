@@ -143,14 +143,14 @@
   </style>
 
 </head>
-
+<script src="menu.js"></script>
 <body>
   <div id="header"></div>
   
   <div id="map"></div>
   <div id="info-box">Haz clic en un marcador para ver detalles.</div>
   <div id="footer"></div>
-
+  
   <script>
     function cargarHeaderYFooter() {
       fetch("header.html")
@@ -281,6 +281,7 @@
         if (joao) mostrarInfo(joao);
       });
     };
+    
   </script>
 
   <script
