@@ -43,45 +43,44 @@
   </button>
   <h2 id="titulo-filtros">Organiza el viaje de tu vida</h2>
 
-  <!-- Filtros ocultos -->
   <section id="filtros-contenido">
-    <section id="filtros">
-      <div class=".btn-filtros {
-        <label for="fechaLlegada">Fecha de llegada:</label>
-        <input type="date" id="fechaLlegada">
-        <label for="fechaSalida">Fecha de salida:</label>
-        <input type="date" id="fechaSalida">
-      </div>
+      <section id="filtros">
+        <div class="grupo">
+          <label for="fechaLlegada">Fecha de llegada:</label>
+          <input type="date" id="fechaLlegada">
+          <label for="fechaSalida">Fecha de salida:</label>
+          <input type="date" id="fechaSalida">
+        </div>
 
-      <div class="grupo">
-        <h3>Personas</h3>
-        <label for="adultos">Adultos:</label>
-        <input type="number" id="adultos" min="1" max="30" value="1">
-        <label for="menores">Menores:</label>
-        <input type="number" id="menores" min="0" max="10" value="0">
-      </div>
+        <div class="grupo">
+          <h3>Personas</h3>
+          <label for="adultos">Adultos:</label>
+          <input type="number" id="adultos" min="1" max="30" value="1">
+          <label for="menores">Menores:</label>
+          <input type="number" id="menores" min="0" max="10" value="0">
+        </div>
 
-      <div class="grupo">
-        <h3>Selecciona tu alojamiento</h3>
-        <label for="tipoAlojamiento">Tipo:</label>
-        <select id="tipoAlojamiento">
-          <option value="">Todos</option>
-          <option value="hotel">Hotel</option>
-          <option value="posada">Posada</option>
-        </select>
-        <label for="categoriaEstrellas">Categoría:</label>
-        <select id="categoriaEstrellas">
-          <option value="">Todas</option>
-          <option value="1">1 Estrella</option>
-          <option value="2">2 Estrellas</option>
-          <option value="3">3 Estrellas</option>
-          <option value="4">4 Estrellas</option>
-          <option value="5">5 Estrellas</option>
-        </select>
-        <button id="verTodosBtn">Ver todos</button>
-      </div>
+        <div class="grupo">
+          <h3>Selecciona tu alojamiento</h3>
+          <label for="tipoAlojamiento">Tipo:</label>
+          <select id="tipoAlojamiento">
+            <option value="">Todos</option>
+            <option value="hotel">Hotel</option>
+            <option value="posada">Posada</option>
+          </select>
+          <label for="categoriaEstrellas">Categoría:</label>
+          <select id="categoriaEstrellas">
+            <option value="">Todas</option>
+            <option value="1">1 Estrella</option>
+            <option value="2">2 Estrellas</option>
+            <option value="3">3 Estrellas</option>
+            <option value="4">4 Estrellas</option>
+            <option value="5">5 Estrellas</option>
+          </select>
+          <button id="verTodosBtn">Ver todos</button>
+        </div>
+      </section>
     </section>
-  </section>
 
   <!-- Carrusel de alojamientos -->
   <div class="swiper">
