@@ -31,7 +31,7 @@ nav ul li {
 
 /* Estilos para el menú oculto en pantallas pequeñas */
 nav ul {
-  display: none;
+  display: none; /* Asegúrate de que el menú esté oculto por defecto */
   position: absolute;
   top: 50px;
   left: 0;
@@ -43,11 +43,11 @@ nav ul {
 }
 
 nav ul.show {
-  display: flex;
+  display: flex; /* Mostrar el menú cuando se active la clase 'show' */
 }
 
 .nav-list {
-  display: none;
+  display: none; /* Asegúrate de que no haya conflictos con el display de 'show' */
   flex-direction: column;
   gap: 1rem;
   list-style: none;
@@ -70,5 +70,10 @@ nav ul.show {
 
   nav ul li {
     padding: 0 15px;
+  }
+
+  /* El menú en pantallas grandes debe ser visible siempre */
+  .nav-list {
+    display: flex; /* Mostrar el menú horizontal */
   }
 }

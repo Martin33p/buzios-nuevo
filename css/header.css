@@ -2,14 +2,27 @@
 header {
   background: linear-gradient(to left, #009739, #f7c600);
   border-bottom: 3px solid #002776;
-  padding: 10px 0;
+  padding: 10px 20px; /* Espaciado alrededor del contenido del header */
+  display: flex;
+  justify-content: space-between; /* Logo a la izquierda, menú a la derecha */
+  align-items: center; /* Alinea verticalmente los elementos */
+  position: relative;
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
-/* Menú (navegación) */
+/* Logo */
+.logo {
+  height: 50px; /* Tamaño del logo */
+  width: auto; /* Mantiene las proporciones del logo */
+  margin-right: 20px; /* Espacio a la derecha del logo */
+}
+
+/* Menú */
 .menu {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: flex-end; /* Alinea el menú a la derecha */
+  align-items: center; /* Alinea el menú verticalmente al centro */
 }
 
 .menu ul {
@@ -17,7 +30,7 @@ header {
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: center;
+  align-items: center; /* Alinea los elementos del menú verticalmente */
 }
 
 .menu ul li {
@@ -30,57 +43,58 @@ header {
   font-size: 16px;
   font-weight: 500;
   transition: color 0.3s;
+  display: flex; /* Para permitir que los iconos y el texto se alineen */
+  align-items: center; /* Alinea los iconos y el texto verticalmente */
+}
+
+.menu ul li a i {
+  margin-right: 8px; /* Espaciado entre el icono y el texto */
+  font-size: 20px; /* Tamaño del icono */
 }
 
 .menu ul li a:hover {
   color: #f7c600;
 }
 
-/* Estilos para el botón hamburguesa */
-.hamburguesa {
-  display: none; /* Ocultar por defecto */
-  font-size: 30px;
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-/* Responsive - Menú en pantallas pequeñas */
+/* Menú en pantallas pequeñas */
 @media (max-width: 768px) {
-  .menu {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    width: 100%;  /* Hacer que el menú ocupe todo el ancho en pantallas pequeñas */
-  }
-
-  /* Mostrar el botón hamburguesa */
-  .hamburguesa {
-    display: block; /* Mostrar solo en pantallas pequeñas */
-  }
-
-  /* Menú oculto por defecto en pantallas pequeñas */
-  .menu ul {
-    display: none;
-    flex-direction: column;
-    width: 100%; /* Asegura que el menú ocupe todo el ancho */
-  }
-
-  /* Mostrar el menú cuando la clase 'show' esté activa */
-  .menu ul.show {
+  header {
     display: flex;
+    justify-content: space-between; /* Logo a la izquierda, menú a la derecha */
+    align-items: center; /* Centra los elementos verticalmente */
+    padding: 10px 10px; /* Ajusta el espaciado */
   }
 
-  /* Estilos para los elementos del menú */
+  .logo {
+    height: 40px; /* Ajusta el tamaño del logo para pantallas pequeñas */
+    margin-right: 10px; /* Espacio entre el logo y el menú */
+  }
+
+  .menu {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos del menú a la derecha */
+    align-items: center;
+  }
+
+  .menu ul {
+    display: flex;
+    flex-direction: row; /* Los elementos del menú siguen en una línea */
+  }
+
   .menu ul li {
-    padding: 10px 0; /* Espaciado adecuado en pantallas pequeñas */
-    width: 100%;
+    padding: 5px;
   }
 
-  .menu ul li a {
-    font-size: 18px;
-    text-align: center;
-    width: 100%;  /* Asegura que los enlaces ocupen todo el ancho */
+  /* Ocultar los textos y mostrar solo los iconos */
+  .menu ul li a span {
+    display: none; /* Ocultar los títulos (textos) */
+  }
+
+  .menu ul li a i {
+    font-size: 15px; /* Hacer los iconos más pequeños */
+  }
+
+  .menu ul li a:hover {
+    color: #f7c600;
   }
 }

@@ -84,12 +84,22 @@ async function cargarAlojamientosCarrusel() {
       window.swiperCarrusel.update();
     } else {
       window.swiperCarrusel = new Swiper(".swiper", {
-        slidesPerView: 1.2,
-        spaceBetween: 10,
+        slidesPerView: 1,      // Muestra una sola tarjeta en pantallas pequeñas
+        spaceBetween: 10,      // Espacio entre las tarjetas
+        centeredSlides: true,  // Centra la tarjeta solo cuando hay una sola visible
         breakpoints: {
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 5 },
+          640: { 
+            slidesPerView: 2, 
+            centeredSlides: false,  // No centrado en pantallas medianas
+          },
+          1024: { 
+            slidesPerView: 3, 
+            centeredSlides: false,  // No centrado en pantallas grandes
+          },
+          1280: { 
+            slidesPerView: 5, 
+            centeredSlides: false,  // No centrado en pantallas más grandes
+          },
         },
         pagination: {
           el: ".swiper-pagination",
@@ -118,4 +128,3 @@ async function cargarAlojamientosCarrusel() {
 }
 
 document.addEventListener("DOMContentLoaded", cargarAlojamientosCarrusel);
-

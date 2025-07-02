@@ -6,9 +6,10 @@ footer {
   font-weight: 400;
   font-size: 14px;
   border-top: 3px solid #002776;
+  position: relative; /* Esto es importante para asegurarse de que se quede en la parte inferior */
+  width: 100%;
 }
-
+/* Contenido dentro del footer */
 .footer-contenido {
   max-width: 1200px;
   margin: 0 auto;
-}

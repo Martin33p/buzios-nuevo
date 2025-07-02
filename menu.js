@@ -1,26 +1,21 @@
 // Función para inicializar el menú hamburguesa
 function initMenu() {
   const hamburguesa = document.querySelector('.hamburguesa');
-  const menu = document.querySelector('.menu ul');  // Cambié el selector para que apunte al <ul> dentro de .menu
+  const menu = document.querySelector('.menu');  // Aquí seleccionamos el contenedor del menú
 
-  // Si el botón hamburguesa y el menú existen en la página
+  // Verificar si los elementos existen antes de agregar el evento
   if (hamburguesa && menu) {
     hamburguesa.addEventListener('click', () => {
-      // Alternar la clase "show" en el menú
-      menu.classList.toggle('show');
+      menu.classList.toggle('show');  // Alternar la clase 'show' para mostrar/ocultar el menú
+      console.log("Hamburguesa clickeada");  // Verificar si el evento se dispara
     });
+  } else {
+    console.error("No se encontró el botón de hamburguesa o el menú.");
   }
 }
 
-// Ejecutar la función de inicialización al cargar la página
-window.addEventListener('DOMContentLoaded', () => {
-  initMenu();  // Inicializa el menú hamburguesa
-
-  // Aquí agregas el listener para la restauración de la página desde la caché del navegador
-  window.addEventListener('pageshow', (event) => {
-    if (event.persisted) { 
-        // Si la página fue restaurada desde la cache de historial
-        initMenu(); // Re-inicializa el menú para asegurarse de que los eventos estén activos
-    }
-  });
+// Asegurarse de que el DOM esté completamente cargado antes de ejecutar el código
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOM cargado, inicializando el menú.");
+  initMenu();  // Inicializa el menú hamburguesa cuando el DOM está listo
 });

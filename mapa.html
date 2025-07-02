@@ -4,164 +4,186 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mapa Google Maps con Playas</title>
-   
-  <!-- Estilos generales -->
-  <link rel="stylesheet" href="css/header.css" />
-  <link rel="stylesheet" href="css/footer.css" />
-  <link rel="stylesheet" href="css/variables.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/navegacion.css" />
+<!-- Estilos CSS -->
+  <link rel="stylesheet" href="css/variables.css">
 
+  <link rel="stylesheet" href="css/navegacion.css">
+  <link rel="stylesheet" href="css/tarjetas.css">
+  <link rel="stylesheet" href="css/botones.css">
+  <link rel="stylesheet" href="css/resumen.css">
+  
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/logo.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+
+  <header id="header">
+  <!-- Logo -->
+  <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo" />
+  
+  <!-- Menú -->
+  <div class="menu">
+    <ul>
+      <li><a href="index.html"><i class="fas fa-bed"></i><span>Alojamientos</span></a></li>
+      <li><a href="mapa.html"><i class="fas fa-map-marker-alt"></i><span>Mapa Interactivo</span></a></li>
+      <li><a href="actividades.html"><i class="fa fa-person-walking"></i><span>Actividades</span></a></li>
+      <li><a href="ofertas.html"><i class="fas fa-tags"></i><span>Ofertas</span></a></li>
+      <li><a href="contacto.html"><i class="fas fa-phone-alt"></i><span>Contacto</span></a></li>
+    </ul>
+  </div>
+</header>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    #header, #footer {
-      width: 100%;
-    }
-
-    #map {
-      height: 90vh;
-      width: 60%;
-      float: left;
-    }
-
-    #info-box {
-      position: fixed;
-      top: 40px;
-      right: 0;
-      width: 40%;
-      max-height: 720px; /* Achicamos más */
-      padding: 10px;
-      background-color: rgb(95, 102, 197);
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
-      color: white;
-      overflow-y: auto;
-      z-index: 9999;
-      box-sizing: border-box;
-      transition: top 0.3s ease-in-out;
-      display: block;
-      height: auto;
-      text-align: center;
-    }
-
-    #info-box .imagenes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: space-between;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .playa-imagen {
-      width: 48%;
-      max-height: 173px; /* Antes 150px */
-      object-fit: cover;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    /* Ocultar imágenes inválidas */
-    .playa-imagen[src=""],
-    .playa-imagen:not([src]),
-    .playa-imagen[src^="undefined"],
-    .playa-imagen[src^="null"],
-    .playa-imagen[src^=" "],
-    .playa-imagen[src$=".undefined"] {
-      display: none !important;
-      visibility: hidden !important;
-      width: 0 !important;
-      height: 0 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-    #info-box iframe {
-      width: 100%;
-      height: 386px; /* Antes 250px */
-      margin-top: 10px;
-      border-radius: px;
-      object-fit: cover;
-    }
-
-    #info-box a {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 8px 16px;
-  background-color: #cdf763;
-  color: #000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+/* General body and structure */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Asegura que el body ocupe toda la altura de la pantalla */
+  display: flex;
+  flex-direction: column; /* Usamos flexbox para distribuir el contenido */
 }
 
-#info-box a:hover {
-  background-color: #b5e62a;
-  color: #222;
-  transform: scale(1.05);
+#header, #footer {
+  width: 100%;
 }
 
-    /* Ocultar las imágenes del info-box en pantallas pequeñas */
-    @media (max-width: 768px) {
-      .info-box img {
-        display: none;
-      }
-    }
+#map {
+  height: 100vh; /* El mapa ocupará el 60% de la altura de la pantalla */
+  width: 100%; /* El mapa ocupa todo el ancho */
+}
 
-    /* Estilos para el submenú desplegable */
-    #sub-menu-playas {
-      display: none;
-      list-style-type: none;
-      padding: 0;
-    }
+#info-box {
+  position: fixed;
+  top: 60vh; /* La tarjeta se coloca debajo del mapa */
+  right: 0;
+  width: 100%; /* La tarjeta ocupa todo el ancho */
+  height: 40vh; /* La tarjeta ocupa el 40% de la altura */
+  padding: 10px;
+  background-color: rgb(95, 102, 197);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: white;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
 
-    #sub-menu-playas.visible {
-      display: block;
-    }
+/* Footer siempre al pie */
+#footer {
+  margin-top: auto; /* Esto asegura que el footer esté siempre al pie de la página */
+  background: linear-gradient(to left, #009739, #f7c600);
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  border-top: 3px solid #002776;
+}
 
-    #sub-menu-playas li {
-      padding: 5px 0;
-    }
+.footer-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-    #sub-menu-playas li a {
-      color: #333;
-      text-decoration: none;
-    }
+/* En pantallas grandes */
+@media (min-width: 768px) {
+  #map {
+    width: 60%; /* El mapa ocupará el 60% del ancho */
+    height: 82vh; /* El mapa ocupa el 60% de la altura */
+    float: left; /* Mapa se alinea a la izquierda */
+  }
 
-    #sub-menu-playas li a:hover {
-      color: #007bff;
-    }
+  #info-box {
+    top: 8.9vh;
+    right: 0;
+    width: 40%; /* La tarjeta ocupa el 40% del ancho */
+    height: 82vh; /* La tarjeta ocupa toda la altura */
+    padding: 10px;
+    background-color: rgb(95, 102, 197);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  /* Ajustes para las imágenes y video */
+  #info-box .imagenes {
+    flex-direction: column;
+    gap: 15px; /* Separación mayor entre imágenes */
+  }
+
+  .playa-imagen {
+    width: 50%;
+    height: 150px; /* Ajustamos las imágenes para que sean más pequeñas */
+    max-height: 150px;
+  }
+
+  #info-box iframe {
+    height: 350px; /* El video tendrá una altura fija de 200px */
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  #map {
+    height: 50vh; /* El mapa ocupará el 60% de la altura */
+    width: 100%; /* El mapa ocupará todo el ancho */
+  }
+
+  #info-box {
+    top: 55vh; /* La tarjeta se coloca debajo del mapa */
+    height: 35vh; /* La tarjeta ocupará el 40% de la altura */
+    width: 100%; /* La tarjeta ocupa todo el ancho */
+    flex-direction: column; /* Se mantiene en columna en pantallas pequeñas */
+  }
+
+  #info-box .imagenes {
+    flex-direction: column; /* Las imágenes se alinean en columna */
+    gap: 10px;
+  }
+
+  .playa-imagen {
+    width: 50%; /* Las imágenes ocupan todo el ancho */
+    max-height: 120px; /* Limitar la altura de las imágenes */
+  }
+
+  #info-box iframe {
+    height: 180px; /* El video tendrá una altura fija de 180px */
+  }
+}
+
+
+
   </style>
 
 </head>
-<script src="menu.js"></script>
-<body>
-  <div id="header"></div>
-  
+
+
+
   <div id="map"></div>
   <div id="info-box">Haz clic en un marcador para ver detalles.</div>
-  <div id="footer"></div>
   
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <script src="script.js" defer></script>
+  <script src="alojamientos.js" defer></script>
+  <script src="alojamientosCarrusel.js" defer></script>
+
+  <div id="footer"></div>
+
   <script>
-    function cargarHeaderYFooter() {
-      fetch("header.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("header").innerHTML = data);
-
-      fetch("footer.html")
-        .then(res => res.text())
-        .then(data => document.getElementById("footer").innerHTML = data);
-    }
-
     let map;
     let infoBox = document.getElementById("info-box");
     let playas = [];
@@ -274,21 +296,24 @@
       return match ? match[1] : null;
     }
 
-    window.onload = () => {
-      cargarHeaderYFooter();
+    document.addEventListener('DOMContentLoaded', () => {
       cargarDatosDesdeSheets().then(() => {
         const joao = playas.find(p => p.nombre.toLowerCase().includes("joão fernandes"));
         if (joao) mostrarInfo(joao);
       });
-    };
-    
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+    fetch("footer.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("footer").innerHTML = data;
+      })
+      .catch(error => console.error("Error al cargar el footer:", error));
+  });
   </script>
 
-  <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&libraries=marker&v=weekly"
-  async
-  defer
-></script>
-
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkSFb52hNl90zpqUypv7UoXxE8xdvegdE&callback=initMap&libraries=marker&v=weekly" async defer></script>
+ <!-- Footer -->
+  
 </body>
 </html>

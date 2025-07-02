@@ -148,9 +148,7 @@
 }
 
 
-.filtros {
-  margin-bottom: 40px;
-}
+
 
 
 .grupo {
@@ -176,4 +174,10 @@
   margin-top: 10px;
   z-index: 10;
 }
-
+@media (max-width: 768px) {
+  /* Asegura que las tarjetas verticales ocupen el 100% del ancho */
+  .tarjeta-vertical {
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    margin: 10px 0; /* Ajusta el margen para que haya espacio entre ellas */
+  }
+}
