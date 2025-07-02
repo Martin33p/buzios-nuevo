@@ -46,7 +46,7 @@
   <!-- Filtros ocultos -->
   <section id="filtros-contenido">
     <section id="filtros">
-      <div class="grupo">
+      <div class=".btn-filtros {
         <label for="fechaLlegada">Fecha de llegada:</label>
         <input type="date" id="fechaLlegada">
         <label for="fechaSalida">Fecha de salida:</label>
@@ -99,6 +99,16 @@
 
 <!-- Cargar el footer con fetch -->
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Obtener los elementos relevantes
+  const toggleButton = document.getElementById('toggle-filters');
+  const filtrosContenido = document.getElementById('filtros-contenido');
+
+  // Agregar el evento de clic al botón de filtros
+  toggleButton.addEventListener('click', () => {
+    filtrosContenido.classList.toggle('active'); // Alterna la visibilidad
+  });
+});
   window.addEventListener('DOMContentLoaded', () => {
     fetch("footer.html")
       .then(res => res.text())
