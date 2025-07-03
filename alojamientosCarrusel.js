@@ -26,7 +26,7 @@ async function cargarAlojamientosCarrusel() {
     const tipoFiltro = (tipoSelect?.value || "").toLowerCase();
     const estrellasFiltro = estrellasSelect?.value || "";
 
-    swiperWrapper.innerHTML = "";
+    swiperWrapper.innerHTML = ""; // Limpiar el carrusel
 
     const alojamientosFiltrados = alojamientos.filter(aloj => {
       const tipo = (aloj["Tipo de hospedaje"] || "").toLowerCase();
@@ -44,6 +44,7 @@ async function cargarAlojamientosCarrusel() {
       return;
     }
 
+    // Renderizar las fichas de alojamiento
     alojamientosFiltrados.forEach(aloj => {
       const nombre = aloj["Nombre"] || "Nombre no disponible";
       const tipo = aloj["Tipo de hospedaje"] || "No especificado";
@@ -71,7 +72,6 @@ async function cargarAlojamientosCarrusel() {
             </iframe>` : ""
           }
 
-          <!-- Nuevo botón independiente "Más información" -->
           <button class="mas-info-boton" onclick="location.href='posada.html?id=${encodeURIComponent(aloj.ID)}'">
             Más información
           </button>
@@ -80,27 +80,21 @@ async function cargarAlojamientosCarrusel() {
       swiperWrapper.appendChild(slide);
     });
 
+    // Iniciar Swiper solo después de haber añadido las fichas
     if (window.swiperCarrusel) {
-      window.swiperCarrusel.update();
+      window.swiperCarrusel.update(); // Actualiza el carrusel si ya existe
     } else {
       window.swiperCarrusel = new Swiper(".swiper", {
-        slidesPerView: 1,      // Muestra una sola tarjeta en pantallas pequeñas
-        spaceBetween: 10,      // Espacio entre las tarjetas
-        centeredSlides: true,  // Centra la tarjeta solo cuando hay una sola visible
+        slidesPerView: 2,
+        spaceBetween: 0,
+        centeredSlides: false, // No centrado por defecto
+
         breakpoints: {
-          640: { 
-            slidesPerView: 2, 
-            centeredSlides: false,  // No centrado en pantallas medianas
-          },
-          1024: { 
-            slidesPerView: 3, 
-            centeredSlides: false,  // No centrado en pantallas grandes
-          },
-          1280: { 
-            slidesPerView: 5, 
-            centeredSlides: false,  // No centrado en pantallas más grandes
-          },
+          640: { slidesPerView: 2, centeredSlides: false },
+          1024: { slidesPerView: 3, centeredSlides: false },
+          1280: { slidesPerView: 5, centeredSlides: false },
         },
+        
         pagination: {
           el: ".swiper-pagination",
           clickable: true,
@@ -109,6 +103,17 @@ async function cargarAlojamientosCarrusel() {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
         },
+
+        on: {
+          init: function () {
+            const swiper = this;
+            // Si solo hay una ficha, centramos la ficha
+            if (swiper.slides.length <= 1) {
+              swiper.params.centeredSlides = true;  // Centra el carrusel si solo hay 1 ficha
+              swiper.update();
+            }
+          }
+        }
       });
     }
   }

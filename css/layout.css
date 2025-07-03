@@ -15,7 +15,6 @@ body {
 /* ===== Ajustes de altura de la página ===== */
 html, body {
   height: 100%;
-  margin: 0;
   display: flex;
   flex-direction: column;  /* Alinea el contenido en columna */
 }
@@ -44,63 +43,37 @@ h3 {
   height: 400px;
   margin-bottom: 20px;
   padding-top: 40px;
+  
   overflow: hidden;
+  display: flex;
+  justify-content: center; /* Centra el carrusel */
+  align-items: center; /* Centra las tarjetas dentro del carrusel */
 }
 
-/* ===== Ajustes para que el carrusel no se desborde ===== */
+/* Ajustes para que el carrusel no se desborde */
 .swiper {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  padding: 0 10px;
+  justify-content: center; /* Asegura que las fichas estén centradas en el carrusel */
+  align-items: center;
   width: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  margin-top: 40px;
+  margin-top: 50px;  /* Espacio arriba para mover el carrusel más abajo */
 }
 
 .swiper-wrapper {
   display: flex;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .swiper-slide {
-  width: 19.5%;
-  margin: 0 10px;
+  width: 100%; /* Asegura que las fichas ocupen todo el espacio disponible */
+  margin: 0 auto; /* Centra la ficha */
   box-sizing: border-box;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Previene que las fichas se reduzcan de tamaño */
   overflow: hidden;
 }
 
-/* ===== Estilos para el carrusel en pantallas pequeñas ===== */
-@media (max-width: 768px) {
-  .swiper-slide {
-    width: 100%; /* Solo 1 imagen visible a la vez en pantallas pequeñas */
-    margin: 10px 0;
-  }
 
-  .swiper-container {
-    height: 300px; /* Ajusta la altura en pantallas pequeñas */
-  }
-
-  .btn-filtros {
-    top: 50px; /* Posicionamos el botón en la parte superior de la pantalla */
-    right: 10px; /* Ajuste para mantener el botón dentro de la pantalla */
-  }
-}
-
-/* ===== Estilos para la paginación de Swiper ===== */
-.swiper-pagination {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 10;
-}
-
-/* ===== Estilo para las flechas del carrusel ===== */
+/* ===== Estilos para las flechas del carrusel ===== */
 .swiper-button-next,
 .swiper-button-prev {
   background-color: white;
@@ -112,16 +85,9 @@ h3 {
   align-items: center;
   justify-content: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  z-index: 10;
   font-size: 18px;
-  border: 2px solid #ddd;
+  border: 2px solid #f80e0e;
   transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-  font-size: 18px;
-  font-weight: normal;
 }
 
 .swiper-button-next:hover,
@@ -144,7 +110,6 @@ h3 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para la estructura de los filtros */
 #filtros-contenido.active {
   display: block;
 }
@@ -163,7 +128,6 @@ h3 {
   overflow-y: auto;
 }
 
-/* Estilo para los grupos de filtros */
 .grupo {
   display: flex;
   flex-direction: column;
@@ -189,7 +153,7 @@ h3 {
   box-shadow: 0 0 8px rgba(0, 119, 204, 0.5);
 }
 
-/* ===== Estilo para los botones de filtros ===== */
+/* ===== Estilos para los botones de filtros ===== */
 .btn-filtros {
   position: fixed;
   top: 80px;
@@ -210,39 +174,243 @@ h3 {
   transform: scale(1.05);
 }
 
-.btn-filtros:focus {
-  outline: none;
+/* ===== GALERÍA DE IMAGEN Y VIDEO ===== */
+.galeria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
 }
 
-.grupo button {
-  background-color: #0077cc;
+.galeria img,
+.galeria video,
+.video-contenedor iframe {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex: 1;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s ease;
+}
+
+.galeria img.loaded,
+.galeria video.loaded,
+.video-contenedor iframe.loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== INFO EXTRA ===== */
+.info-lista {
+  list-style: none;
+  padding: 0;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.info-lista li {
+  margin-bottom: 0.5rem;
+  color: #444;
+  font-size: 0.95rem;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: slideIn 0.6s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.info-lista li::before {
+  content: '✔';
+  color: #009739;
+  position: absolute;
+  left: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .galeria {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .galeria img,
+  .galeria video,
+  .video-contenedor iframe {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-slide {
+    width: 100%; /* Solo 1 imagen visible a la vez en pantallas pequeñas */
+    margin: 0;
+  }
+
+  .swiper-container {
+    height: 300px; /* Ajusta la altura en pantallas pequeñas */
+  }
+}
+
+/* Video con loop visualmente correcto */
+.video-alojamiento {
+  pointer-events: auto;
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  margin-top: 10px;
+  z-index: 10;
+}
+
+/* Estilos para las tarjetas verticales */
+.tarjeta-vertical {
+  background: linear-gradient(135deg, #ffffff, #f0f8ff);
+  border: 2px solid #cde1ff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  margin: 20px auto;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-vertical:hover {
+  transform: scale(1.03);
+}
+
+.tarjeta-vertical img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.tarjeta-vertical h4 {
+  margin: 8px 0 4px 0;
+  font-size: 16px;
+  color: #004AAD;
+}
+
+.tarjeta-vertical p {
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Estilos para la tarjeta de alojamiento */
+.tarjeta-alojamiento {
+  background: #e5f5093c;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.4rem;
+  max-width: 250px;
+  width: 95%;
+  height: auto;
+}
+
+.tarjeta-alojamiento h3 {
+  text-align: center;
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.tarjeta-alojamiento p {
+  font-size: 13px;
+  margin: 2px 0;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.tarjeta-alojamiento img,
+.tarjeta-alojamiento img.imagen-alojamiento {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 6px;
+}
+
+.tarjeta-alojamiento iframe {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  margin-top: 6px;
+}
+
+/* Estilos para las tarjetas clásicas */
+.card {
+  background: var(--color-card);
+  color: black;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: var(--sombra-estandar);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para las tarjetas de promociones */
+.tarjeta-oferta {
+  background: var(--color-card);
+  color: black;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: var(--sombra-estandar);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.tarjeta-oferta:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos para el botón "Más información" */
+.mas-info-boton {
+  background-color: #4CAF50;
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
-.grupo button:hover {
-  background-color: #005fa3;
+.mas-info-boton:hover {
+  background-color: #45a049;
+}
+/* Estilo general para el título */
+#titulo-filtros {
+  text-align: center;  /* Centra el texto */
+  margin-top: 20px;  /* Espacio superior para el título */
 }
 
-/* ===== Filtros dentro del contenedor ===== */
-#filtros {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Limitar el ancho de los campos */
-.grupo input,
-.grupo select {
-  width: 200px;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #e12d2d;
-}
-
-.grupo label {
-  font-size: 14px;
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  #titulo-filtros {
+    margin-top: 50px;  /* Mueve el título más abajo en pantallas pequeñas */
+    font-size: 1.6rem;  /* Ajusta el tamaño de la fuente si es necesario */
+  }
 }
