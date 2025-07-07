@@ -85,7 +85,7 @@ async function cargarAlojamientosCarrusel() {
       window.swiperCarrusel.update(); // Actualiza el carrusel si ya existe
     } else {
       window.swiperCarrusel = new Swiper(".swiper", {
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 0,
         centeredSlides: false, // No centrado por defecto
 

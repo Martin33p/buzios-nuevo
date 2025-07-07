@@ -7,11 +7,10 @@
 
   <!-- Estilos CSS -->
   <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/navegacion.css">
-  <link rel="stylesheet" href="css/tarjetas.css">
+
+
   <link rel="stylesheet" href="css/botones.css">
-  <link rel="stylesheet" href="css/resumen.css">
+ 
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/logo.css" />
@@ -22,8 +21,8 @@
     /* Establecer imagen de fondo para toda la página */
     html, body {
       height: 100%;
-      margin: 0;
-      padding: 0;
+      margin: 10;
+      padding: 10;
     }
 
     body {
@@ -34,6 +33,7 @@
       background-attachment: fixed;
       color: #333;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     #info-playa {
@@ -42,7 +42,7 @@
       padding: 20px;
       background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
       margin-top: 30px;
     }
 
@@ -54,10 +54,11 @@
     }
 
     .swiper-container {
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+  position: relative; /* <-- fundamental */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
     .swiper-slide {
       width: 18%;
@@ -72,8 +73,13 @@
     }
 
     .swiper-pagination {
-      bottom: 10px;
-    }
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 10; /* por si hay cosas delante */
+}
 
     /* Título de la playa */
     #playa-nombre {
@@ -85,11 +91,19 @@
     }
 
     /* Textos y descripciones */
-    #descripcion-playa, #latitud-longitud, #datos-adicionales {
+    #tex-html {
       font-size: 18px;
       line-height: 1.6;
       color: #555;
       margin-bottom: 20px;
+      text-align: justify; /* ✔ Alineado parejito */
+    }
+    #descripcion-playa {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+      
     }
 
     /* Estilos para enlaces */
@@ -119,6 +133,40 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       object-fit: cover;
     }
+    @media screen and (max-width: 600px) {
+  #info-playa {
+    padding: 10px;
+  }
+
+  #playa-nombre {
+    font-size: 24px;
+  }
+
+  #descripcion-playa, #datos-adicionales {
+    font-size: 16px;
+  }
+
+  #videos-playa {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #videos-playa iframe {
+    width: 100%;
+    height: 180px;
+  }
+  #imagenes-playa {
+    height: 180px;
+  }
+
+  .swiper-slide {
+    width: auto;
+  }
+
+  .swiper-slide img {
+    object-fit: cover;
+  }
+}
   </style>
 </head>
 
@@ -146,7 +194,7 @@
 
     <h2 id="playa-nombre"></h2>
     <p id="descripcion-playa"></p>
-    <p id="latitud-longitud"></p>
+    
 
     <!-- Carrusel de imágenes -->
     <div id="imagenes-playa" class="swiper-container">
@@ -156,7 +204,7 @@
 
     <div id="videos-playa"></div>
     <div id="datos-adicionales"></div>
-    <a id="link-hotel" href="" target="_blank">Más información del hotel</a>
+    
   </section>
 
   <!-- Footer -->
@@ -182,8 +230,7 @@
           return {
             id: c[0]?.v || "",
             nombre: c[1]?.v || "",
-            lat: parseFloat(c[2]?.v) || 0,
-            lng: parseFloat(c[3]?.v) || 0,
+            
             descripcion: c[4]?.v || "",
             datos: c[5]?.v || "",
             imagenes: [c[6]?.v, c[7]?.v, c[8]?.v, c[9]?.v, c[10]?.v, c[11]?.v, c[12]?.v, c[13]?.v, c[14]?.v, c[15]?.v].filter(Boolean),
@@ -207,7 +254,7 @@
     function mostrarInformacion(playa) {
       document.getElementById("playa-nombre").innerText = playa.nombre;
       document.getElementById("descripcion-playa").innerHTML = `<p>${playa.descripcion}</p>`;
-      document.getElementById("latitud-longitud").innerHTML = `<p>Latitud: ${playa.lat}, Longitud: ${playa.lng}</p>`;
+      
 
       if (playa.tituloHTML) {
         document.getElementById("titulo-html").innerHTML = playa.tituloHTML;
@@ -230,13 +277,28 @@
       });
 
       const swiper = new Swiper('.swiper-container', {
-        loop: true,
-        autoplay: { delay: 5000 },
-        slidesPerView: 5,
-        spaceBetween: 10,
-        pagination: { el: '.swiper-pagination', clickable: true }
-      });
-
+  loop: true,
+  autoplay: { delay: 5000 },
+  spaceBetween: 10,
+  pagination: { el: '.swiper-pagination', clickable: true },
+  breakpoints: {
+    0: {
+      slidesPerView: 1
+    },
+    480: {
+      slidesPerView: 2
+    },
+    768: {
+      slidesPerView: 3
+    },
+    992: {
+      slidesPerView: 4
+    },
+    1200: {
+      slidesPerView: 5
+    }
+  }
+});
       const contenedorVideos = document.getElementById("videos-playa");
       playa.videos.forEach(video => {
         const iframe = document.createElement("iframe");
@@ -252,7 +314,7 @@
       document.getElementById("datos-adicionales").innerHTML = `<p>${playa.datos}</p>`;
       const linkHotel = document.getElementById("link-hotel");
       linkHotel.href = playa.linkHotel;
-      linkHotel.innerText = "Más información sobre el hotel";
+      
     }
 
     // Función para extraer el ID del video de YouTube
