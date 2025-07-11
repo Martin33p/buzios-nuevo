@@ -10,6 +10,11 @@ body {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
               url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
   color: rgb(73, 240, 32);
+   height: 100%;
+   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /* ===== Ajustes de altura de la página ===== */

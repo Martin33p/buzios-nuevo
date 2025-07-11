@@ -40,9 +40,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Asegura que el body ocupe toda la altura de la pantalla */
+  height: 100%;
   display: flex;
-  flex-direction: column; /* Usamos flexbox para distribuir el contenido */
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 #header, #footer {
@@ -50,16 +51,17 @@ html, body {
 }
 
 #map {
-  height: 100vh; /* El mapa ocupará el 60% de la altura de la pantalla */
-  width: 100%; /* El mapa ocupa todo el ancho */
+  height: 100vh;
+  width: 100%;
 }
 
+/* Estilo para el info-box */
 #info-box {
-  position: fixed;
-  top: 60vh; /* La tarjeta se coloca debajo del mapa */
+  position: absolute;
+  top: 60vh;
   right: 0;
-  width: 100%; /* La tarjeta ocupa todo el ancho */
-  height: 40vh; /* La tarjeta ocupa el 40% de la altura */
+  width: 100%;
+  height: 40vh;
   padding: 10px;
   background-color: rgb(95, 102, 197);
   border-top-left-radius: 10px;
@@ -71,6 +73,24 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+}
+
+#info-box .video {
+  display: block;
+  margin-top: 10px;
+  height: 10px; /* Ajusta la altura del video según lo necesites */
+}
+
+.playa-video {
+  width: 100%; /* Hace que el video ocupe todo el ancho disponible */
+  height: 30%; /* Hace que el video ocupe el 100% de la altura del contenedor */
+}
+
+.playa-imagen {
+  width: 100%; 
+  height: auto; 
+  max-height: 200px; 
+  object-fit: cover;
 }
 
 /* Footer siempre al pie */
@@ -90,19 +110,71 @@ html, body {
   margin: 0 auto;
 }
 
+/* Título flotante sobre el mapa */
+#titulo-playa {
+  position: absolute;
+  top: 50px;  /* Ajusta la posición en la parte superior */
+  left: 50%;  /* Centra el título horizontalmente */
+  transform: translateX(-20%);  /* Asegura que el título esté centrado */
+  z-index: 20;  /* Asegura que el título esté por encima del mapa */
+  background-color: rgba(97, 104, 201, 0); /* Fondo semi-transparente */
+  color: white;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
+/* Estilo para el enlace "Ver más información" */
+.ver-mas-btn {
+  display: inline-block;
+  margin-top: 260px;
+  padding: 10px 20px;
+  background-color: #f7c600; /* Color de fondo */
+  color: #002776; /* Color del texto */
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none; /* Elimina el subrayado */
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Efectos de transición */
+}
+.ver-mas-btn:hover {
+  background-color: #009739; /* Color de fondo al pasar el mouse */
+  color: #fff; /* Color del texto al pasar el mouse */
+  transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
+}
+/* Estilo para la descripción flotante */
+#descripcion-flotante {
+  position: absolute;
+  bottom: 0px;  /* Coloca la descripción al pie del mapa */
+  left: 50%;  /* Centra el texto horizontalmente */
+  transform: translateX(-50%);  /* Asegura que esté centrado */
+  z-index: 210;  /* Asegura que la descripción esté por encima del mapa */
+  background-color: rgba(95, 102, 197, 0);  /* Fondo semitransparente */
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 100%; /* Limita el ancho para que no ocupe toda la pantalla */
+  box-sizing: border-box;
+  overflow: hidden;  /* Evita desbordes */
+  word-wrap: break-word; /* Hace que el texto se ajuste si es demasiado largo */
+}
 /* En pantallas grandes */
 @media (min-width: 768px) {
   #map {
-    width: 60%; /* El mapa ocupará el 60% del ancho */
-    height: 82vh; /* El mapa ocupa el 60% de la altura */
-    float: left; /* Mapa se alinea a la izquierda */
+    width: 70%;
+    height: 82vh;
+    float: left;
   }
 
   #info-box {
     top: 8.9vh;
     right: 0;
-    width: 40%; /* La tarjeta ocupa el 40% del ancho */
-    height: 82vh; /* La tarjeta ocupa toda la altura */
+    width: 30%;
+    height: 80vh;
     padding: 10px;
     background-color: rgb(95, 102, 197);
     border-top-left-radius: 10px;
@@ -116,59 +188,59 @@ html, body {
     text-align: center;
   }
 
-  /* Ajustes para las imágenes y video */
+  /* Mostrar imágenes y video en pantallas grandes */
   #info-box .imagenes {
-    flex-direction: column;
-    gap: 15px; /* Separación mayor entre imágenes */
+    display: flex;
+    flex-direction: column; /* Las imágenes se apilan verticalmente */
+    gap: 15px; /* Espacio entre imágenes */
   }
 
-  .playa-imagen {
-    width: 50%;
-    height: 150px; /* Ajustamos las imágenes para que sean más pequeñas */
-    max-height: 150px;
+  #info-box .video {
+    display: block; /* Mostrar video debajo de las imágenes */
   }
 
+  /* No mostrar el video en pantallas grandes, ya que las imágenes son las principales */
   #info-box iframe {
-    height: 350px; /* El video tendrá una altura fija de 200px */
+    height: 350px;
   }
 }
 
 /* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
   #map {
-    height: 50vh; /* El mapa ocupará el 60% de la altura */
-    width: 100%; /* El mapa ocupará todo el ancho */
+    height: 50vh;
+    width: 100%;
   }
 
   #info-box {
-    top: 55vh; /* La tarjeta se coloca debajo del mapa */
-    height: 35vh; /* La tarjeta ocupará el 40% de la altura */
-    width: 100%; /* La tarjeta ocupa todo el ancho */
-    flex-direction: column; /* Se mantiene en columna en pantallas pequeñas */
+    top: 55vh;
+    height: 35vh;
+    width: 100%;
+    flex-direction: column;
   }
 
+  /* Mostrar solo el video en pantallas pequeñas */
   #info-box .imagenes {
-    flex-direction: column; /* Las imágenes se alinean en columna */
-    gap: 10px;
+    display: none; /* Ocultar las imágenes en pantallas pequeñas */
   }
 
-  .playa-imagen {
-    width: 50%; /* Las imágenes ocupan todo el ancho */
-    max-height: 120px; /* Limitar la altura de las imágenes */
+  #info-box .video {
+    display: block; /* Mostrar solo el video */
+    margin-top: 0px;
   }
 
+  /* Ajustar la altura del video en pantallas pequeñas */
   #info-box iframe {
-    height: 180px; /* El video tendrá una altura fija de 180px */
+    height: 258px;
   }
 }
-
 
 
   </style>
 
 </head>
 
-
+<h1 id="titulo-playa" class="titulo-flotante">Haz clic en un marcador para ver detalles.</h1>
 
   <div id="map"></div>
   <div id="info-box">Haz clic en un marcador para ver detalles.</div>
@@ -260,36 +332,38 @@ html, body {
       marker.addListener("click", () => mostrarInfo(playa));
     }
 
-    function mostrarInfo(playa) {
-      if (!infoBox) return;
+function mostrarInfo(playa) {
+  if (!infoBox) return;
 
-      const imagenes = playa.imagenes
-        .filter(img => img && img.trim() !== "")
-        .map(img => `<img src="${img}" class="playa-imagen">`)
-        .join("");
+  // Cambiar el título de la playa al h1 flotante
+  const tituloPlayas = document.getElementById('titulo-playa');
+  tituloPlayas.innerHTML = playa.nombre;  // Establecer el nombre de la playa como título
 
-      const video = playa.videos[0];
-      const id = extraerIDVideo(video);
-      const videoHtml = id
-        ? `<iframe
-             src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1"
-             frameborder="0"
-             allow="autoplay; encrypted-media"
-             allowfullscreen
-             class="playa-video"
-           ></iframe>`
-        : "";
+  // Construir el HTML de la información
+  const imagenes = playa.imagenes
+    .filter(img => img && img.trim() !== "")
+    .map(img => `<img src="${img}" class="playa-imagen">`)
+    .join("");
 
-      infoBox.innerHTML = `
-        <h3>${playa.nombre}</h3>
-        <p>${playa.descripcion}</p>
-        <div class="imagenes">${imagenes}</div>
-        <div class="video">${videoHtml}</div>
-        <a href="playas.html?id=${playa.id}" target="_blank">Ver más información</a>
-      `;
-      infoBox.style.display = "block";
-      infoBox.scrollIntoView({ behavior: "smooth" });
-    }
+  const video = playa.videos[0];
+  const id = extraerIDVideo(video);
+  const videoHtml = id
+    ? `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen class="playa-video"></iframe>`
+    : "";
+
+  infoBox.innerHTML = `
+  <div id="descripcion-flotante">${playa.descripcion}</div>
+  <div class="imagenes">${imagenes}</div>
+  <div class="video">${videoHtml}</div>
+  <a href="playas.html?id=${playa.id}" target="_blank" class="ver-mas-btn">Ver más información</a>
+`;
+
+  infoBox.style.display = "block";
+  infoBox.scrollIntoView({ behavior: "smooth" });
+}
+
+
+
 
     function extraerIDVideo(url) {
       const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);

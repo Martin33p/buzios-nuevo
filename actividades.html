@@ -74,74 +74,68 @@
     const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=1341822128&single=true&output=csv";
 
     fetch(sheetUrl)
-  .then(res => res.text())
-  .then(csv => {
-    const data = Papa.parse(csv, { header: true }).data;
-    const contenedor = document.getElementById("actividad-carrusel");
+      .then(res => res.text())
+      .then(csv => {
+        const data = Papa.parse(csv, { header: true }).data;
+        const contenedor = document.getElementById("actividad-carrusel");
 
-    data.forEach(act => {
-      const videoID = extraerIDYoutube(act["Video 1"]);
-      const videoHTML = videoID ? `<iframe src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>` : "";
+        data.forEach(act => {
+          const videoID = extraerIDYoutube(act["Video 1"]);
+          const videoHTML = videoID ? `<iframe src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>` : "";
 
-      const tarjeta = document.createElement("div");
-      tarjeta.classList.add("swiper-slide");
-      tarjeta.innerHTML = `
-        <div class="tarjeta-alojamiento">
-          <img src="${act.Img1}" alt="Imagen de ${act.Nombre}">
-          <h3>${act.Nombre}</h3>
-          <p>${act["Descripción 1"] || ""}</p>
-          ${videoHTML}
-          <button class="mas-info-boton" onclick="location.href='actividad.html?id=${act.ID}'">
-            Más información
-          </button>
-        </div>
-      `;
-      contenedor.appendChild(tarjeta);
-    });
+          const tarjeta = document.createElement("div");
+          tarjeta.classList.add("swiper-slide");
+          tarjeta.innerHTML = `
+            <div class="tarjeta-alojamiento">
+              <img src="${act.Img1}" alt="Imagen de ${act.Nombre}">
+              <h3>${act.Nombre}</h3>
+              <p>${act["Descripción 1"] || ""}</p>
+              ${videoHTML}
+              <button class="mas-info-boton" onclick="location.href='actividad.html?id=${act.ID}'">
+                Más información
+              </button>
+            </div>
+          `;
+          contenedor.appendChild(tarjeta);
+        });
 
-    // ✔️ Agregado para centrar si hay solo una tarjeta
-    const totalSlides = contenedor.querySelectorAll(".swiper-slide").length;
-    if (totalSlides === 1) {
-      contenedor.classList.add("centrar-una-tarjeta");
-    }
+         new Swiper('.swiper', {
+          loop: true,
+          slidesPerView: 5,
+          spaceBetween: 20,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            0: {
+              slidesPerView: 1
+            },
+            576: {
+              slidesPerView: 2
+            },
+            768: {
+              slidesPerView: 3
+            },
+            992: {
+              slidesPerView: 4
+            },
+            1200: {
+              slidesPerView: 5
+            }
+          }
+        }); // <- CIERRE CORRECTO
 
-    new Swiper('.swiper', {
-      loop: true,
-      slidesPerView: 5,
-      spaceBetween: 0,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        0: {
-          slidesPerView: 1
-        },
-        576: {
-          slidesPerView: 2
-        },
-        768: {
-          slidesPerView: 3
-        },
-        992: {
-          slidesPerView: 4
-        },
-        1200: {
-          slidesPerView: 5
-        }
+      }); // <- Cierre del .then()
+
+      function extraerIDYoutube(url) {
+        const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
+        return match ? match[1] : null;
       }
-    });
-  });
-
-function extraerIDYoutube(url) {
-  const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i);
-  return match ? match[1] : null;
-}
-
   </script>
    <!-- Footer -->
   <footer id="footer">
