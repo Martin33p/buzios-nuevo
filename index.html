@@ -29,11 +29,12 @@
   <!-- Menú -->
   <div class="menu">
     <ul>
-      <li><a href="index.html"><i class="fas fa-bed"></i><span>Alojamientos</span></a></li>
-      <li><a href="mapa.html"><i class="fas fa-map-marker-alt"></i><span>Mapa Interactivo</span></a></li>
+      
+      <li><a href="Buzios-Brasil.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+      <li><a href="index.html"><i class="fas fa-bed"></i><span>Hospedajes</span></a></li>
+      <li><a href="mapa.html"><i class="fas fa-map-marker-alt"></i><span>Playas</span></a></li>
       <li><a href="actividades.html"><i class="fa fa-person-walking"></i><span>Actividades</span></a></li>
-      <li><a href="ofertas.html"><i class="fas fa-tags"></i><span>Ofertas</span></a></li>
-      <li><a href="contacto.html"><i class="fas fa-phone-alt"></i><span>Contacto</span></a></li>
+           <li><a href="contacto.html"><i class="fas fa-phone-alt"></i><span>Contacto</span></a></li>
     </ul>
   </div>
 </header>
@@ -43,7 +44,7 @@
   <button id="toggle-filters" aria-label="Mostrar/Ocultar filtros" class="btn-filtros">
     Filtros
   </button>
-  <h2 id="titulo-filtros">Descubre los alojamientos más exclusivos y encantadores de Búzios</h2>
+  <h2 id="titulo-filtros">Descubre los hospedajes más exclusivos y encantadores de Búzios</h2>
 
   <section id="filtros-contenido">
       <section id="filtros">
@@ -64,8 +65,8 @@
 
         <div class="grupo">
           <h3>Selecciona tu alojamiento</h3>
-          <label for="tipoAlojamiento">Tipo:</label>
-          <select id="tipoAlojamiento">
+          <label for="tipoHospedajes">Tipo:</label>
+          <select id="tipoHospedajes">
             <option value="">Todos</option>
             <option value="hotel">Hotel</option>
             <option value="posada">Posada</option>
@@ -84,10 +85,10 @@
       </section>
     </section>
 
-  <!-- Carrusel de alojamientos -->
+  <!-- Carrusel de .btn-filtros { -->
   <div class="swiper">
     <div class="swiper-wrapper">
-      <!-- Las tarjetas de alojamientos se generarán dinámicamente aquí -->
+      <!-- Las tarjetas de aHospedajes se generarán dinámicamente aquí -->
     </div>
     <div class="swiper-pagination"></div>
     <div class="swiper-button-prev"></div>
@@ -124,8 +125,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script src="script.js" defer></script>
-<script src="alojamientos.js" defer></script>
-<script src="alojamientosCarrusel.js" defer></script>
+<script src="Hospedajes.js" defer></script>
+<script src="HospedajesCarrusel.js" defer></script>
 <script src="menu.js" defer></script>
 
 </body>

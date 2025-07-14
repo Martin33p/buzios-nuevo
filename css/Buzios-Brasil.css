@@ -1,0 +1,250 @@
+/* home.css */
+
+.hero {
+  height: 90vh;
+  background: url('../assets/playa-hero.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  color: white;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.boton {
+  background-color: #00b37a;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.boton:hover {
+  background-color: #008f5e;
+}
+
+.boton-secundario {
+  margin-top: 15px;
+  display: inline-block;
+  color: #00b37a;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.destacados {
+  padding: 40px 20px;
+  background-color: #f5f5f5;
+}
+
+.bloque {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.bloque h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.swiper-slide img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.cta {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, #009739, #f7c600);
+  color: white;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.galeria-Hospedajes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.galeria-Hospedajes img {
+  width: 160px !important;
+  height: 90px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid #ddd !important;
+  background-color: #f0f0f0 !important;
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.galeria-Hospedajes img:hover {
+  transform: scale(1.03) !important;
+}
+.galeria-Hospedajes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tarjeta-hospedaje {
+  text-align: center;
+  width: 160px;
+}
+
+.tarjeta-hospedaje img {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.tarjeta-hospedaje img:hover {
+  transform: scale(1.05);
+}
+
+.titulo-hospedaje {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+.galeria-Playas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tarjeta-playa {
+  text-align: center;
+  width: 160px;
+}
+
+.tarjeta-playa img {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.tarjeta-playa img:hover {
+  transform: scale(1.05);
+}
+
+.titulo-playa {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+/* Galería de actividades */
+.galeria-Actividades {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.galeria-Actividades figure {
+  width: 180px;
+  text-align: center;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease;
+}
+
+.galeria-Actividades figure:hover {
+  transform: scale(1.05);
+}
+
+.galeria-Actividades img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.galeria-Actividades figcaption {
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 10px;
+  color: #333;
+  background-color: #fff;
+}
+/* Galería de playas */
+.galeria-Playas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.galeria-Playas figure {
+  width: 180px;
+  text-align: center;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease;
+}
+
+.galeria-Playas figure:hover {
+  transform: scale(1.05);
+}
+
+.galeria-Playas img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+
+.galeria-Playas figcaption {
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 10px;
+  color: #333;
+  background-color: #fff;
+}

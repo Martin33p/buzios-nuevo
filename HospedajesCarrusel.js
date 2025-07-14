@@ -4,8 +4,8 @@ function extraerIDYoutube(url) {
   return match ? match[1] : null;
 }
 
-// Función para cargar los alojamientos en el carrusel
-async function cargarAlojamientosCarrusel() {
+// Función para cargar los Hospedajes en el carrusel
+async function cargarHospedajesCarrusel() {
   const urlCSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv";
   const response = await fetch(urlCSV);
   const csvText = await response.text();
@@ -15,7 +15,7 @@ async function cargarAlojamientosCarrusel() {
     skipEmptyLines: true
   });
 
-  const alojamientos = parsed.data;
+  const Hospedajes = parsed.data;
 
   const tipoSelect = document.getElementById("tipoAlojamiento");
   const estrellasSelect = document.getElementById("categoriaEstrellas");
@@ -28,7 +28,7 @@ async function cargarAlojamientosCarrusel() {
 
     swiperWrapper.innerHTML = ""; // Limpiar el carrusel
 
-    const alojamientosFiltrados = alojamientos.filter(aloj => {
+    const HospedajesFiltrados = Hospedajes.filter(aloj => {
       const tipo = (aloj["Tipo de hospedaje"] || "").toLowerCase();
       const estrellas = aloj["Estrellas"] || "";
 
@@ -38,14 +38,14 @@ async function cargarAlojamientosCarrusel() {
       return coincideTipo && coincideEstrellas;
     });
 
-    if (alojamientosFiltrados.length === 0) {
-      swiperWrapper.innerHTML = "<p style='padding:1rem;'>No se encontraron alojamientos para esa combinación.</p>";
+    if (HospedajesFiltrados.length === 0) {
+      swiperWrapper.innerHTML = "<p style='padding:1rem;'>No se encontraron Hospedajes para esa combinación.</p>";
       if (window.swiperCarrusel) window.swiperCarrusel.update();
       return;
     }
 
     // Renderizar las fichas de alojamiento
-    alojamientosFiltrados.forEach(aloj => {
+    HospedajesFiltrados.forEach(aloj => {
       const nombre = aloj["Nombre"] || "Nombre no disponible";
       const tipo = aloj["Tipo de hospedaje"] || "No especificado";
       const estrellas = aloj["Estrellas"] || "0";
@@ -132,4 +132,4 @@ async function cargarAlojamientosCarrusel() {
   filtrarYRenderizar(); // Mostrar inicialmente
 }
 
-document.addEventListener("DOMContentLoaded", cargarAlojamientosCarrusel);
+document.addEventListener("DOMContentLoaded", cargarHospedajesCarrusel);

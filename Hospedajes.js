@@ -13,10 +13,10 @@ async function cargarPosada() {
   const csvText = await response.text();
 
   const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-  const alojamientos = parsed.data;
+  const Hospedajes = parsed.data;
 
   // Buscar el alojamiento por ID
-  const posada = alojamientos.find(a => a.ID === posadaID);
+  const posada = Hospedajes.find(a => a.ID === posadaID);
 
   if (!posada) {
     console.error('Posada no encontrada.');
