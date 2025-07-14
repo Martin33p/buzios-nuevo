@@ -109,7 +109,7 @@ infoExtra.innerHTML = `
 
   // Botón volver
   document.getElementById("volver-btn").innerHTML = 
-    <a href="/index.html" class="volver-btn">← Volver a index</a>
+    <a href="/hospedaje.html" class="volver-btn">← Volver a index</a>
   ;
 }
 
