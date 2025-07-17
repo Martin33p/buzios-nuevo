@@ -140,20 +140,20 @@ html, body {
 }
 .ver-mas-btn:hover {
   background-color: #009739; /* Color de fondo al pasar el mouse */
-  color: #fff; /* Color del texto al pasar el mouse */
+  color: #ffffff00; /* Color del texto al pasar el mouse */
   transform: scale(1.05); /* Efecto de aumento al pasar el mouse */
 }
 /* Estilo para la descripción flotante */
 #descripcion-flotante {
   position: absolute;
-  bottom: 0px;  /* Coloca la descripción al pie del mapa */
+  bottom: 70px;  /* Alinea la descripción al pie del mapa */
   left: 50%;  /* Centra el texto horizontalmente */
   transform: translateX(-50%);  /* Asegura que esté centrado */
   z-index: 210;  /* Asegura que la descripción esté por encima del mapa */
-  background-color: rgba(95, 102, 197, 0);  /* Fondo semitransparente */
-  color: white;
+  background-color: rgba(95, 102, 197, 0.79);  /* Fondo semitransparente */
+  color: rgb(255, 255, 255);
   padding: 10px;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: normal;
   border-radius: 5px;
   text-align: center;
@@ -244,6 +244,7 @@ html, body {
 
   <div id="map"></div>
   <div id="info-box">Haz clic en un marcador para ver detalles.</div>
+  <div id="descripcion-flotante"></div>
   
 
   <!-- Scripts -->
@@ -339,7 +340,11 @@ function mostrarInfo(playa) {
   const tituloPlayas = document.getElementById('titulo-playa');
   tituloPlayas.innerHTML = playa.nombre;  // Establecer el nombre de la playa como título
 
-  // Construir el HTML de la información
+  // Colocar la descripción en el contenedor flotante
+  const descripcionFlotante = document.getElementById("descripcion-flotante");
+  descripcionFlotante.innerHTML = `${playa.descripcion}`;
+
+  // Construir el HTML de la información de imágenes y videos
   const imagenes = playa.imagenes
     .filter(img => img && img.trim() !== "")
     .map(img => `<img src="${img}" class="playa-imagen">`)
@@ -351,16 +356,16 @@ function mostrarInfo(playa) {
     ? `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&mute=1" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen class="playa-video"></iframe>`
     : "";
 
-  infoBox.innerHTML = `
-  <div id="descripcion-flotante">${playa.descripcion}</div>
-  <div class="imagenes">${imagenes}</div>
-  <div class="video">${videoHtml}</div>
-  <a href="playas.html?id=${playa.id}" target="_blank" class="ver-mas-btn">Ver más información</a>
-`;
+  infoBox.innerHTML = `  <!-- Ya no contiene la descripción -->
+    <div class="imagenes">${imagenes}</div>
+    <div class="video">${videoHtml}</div>
+    <a href="playas.html?id=${playa.id}" target="_blank" class="ver-mas-btn">Ver más información</a>
+  `;
 
   infoBox.style.display = "block";
   infoBox.scrollIntoView({ behavior: "smooth" });
 }
+
 
 
 

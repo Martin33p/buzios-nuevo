@@ -9,7 +9,7 @@
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
               url('https://www.cronista.com/files/image/308/308209/5ffe31164d40e.webp?oe=jpg') no-repeat center center / cover;
-  color: rgb(73, 240, 32);
+  color: rgb(249, 246, 246);
    height: 100%;
    margin: 0;
   padding: 0;
@@ -19,9 +19,12 @@ body {
 
 /* ===== Ajustes de altura de la página ===== */
 html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
   display: flex;
-  flex-direction: column;  /* Alinea el contenido en columna */
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* ===== Estilos para el main ===== */
@@ -110,11 +113,15 @@ h3 {
 .filtros {
   margin-bottom: 40px;
   padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #cbcbcb;
+  border-radius: 12px; /* Bordes más redondeados para un look más suave */
+  box-shadow: 0 6px 18px rgba(242, 6, 6, 0.1); /* Sombra más pronunciada */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Mayor separación entre los grupos de filtros */
 }
 
+/* Estilos para el contenedor de filtros cuando se activa */
 #filtros-contenido.active {
   display: block;
 }
@@ -124,39 +131,109 @@ h3 {
   position: fixed;
   top: 125px;
   right: 0;
-  background-color: #2cf9f9;
+  background-color: #8a878700;
   width: 300px;
   height: calc(90vh - 90px);
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Sombra más definida */
   padding: 20px;
   z-index: 10;
   overflow-y: auto;
+  border-radius: 15px;
 }
 
+/* Estilos para los grupos de filtros */
 .grupo {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 0;
+  gap: 5px; /* Aumenta el espacio entre los elementos dentro del grupo */
 }
 
-.grupo label,
+/* Estilo de los labels */
+.grupo label {
+  font-size: 16px; /* Ajustamos el tamaño de fuente */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px; /* Mejor separación entre el label y el campo */
+}
+
+/* Estilo de inputs y selects */
 .grupo input,
 .grupo select {
   display: block;
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #47f14100;
+  padding: 10px; /* Aumentamos el padding para dar más espacio */
+  font-size: 16px;
+  border-radius: 0px; /* Bordes redondeados */
+  border: 1px solid #ddd; /* Borde suave y sutil */
+  background-color: #fffefe; /* Fondo suave para los inputs */
   transition: all 0.3s ease;
 }
 
+/* Estilo de los inputs y selects cuando están en foco */
 .grupo input:focus,
 .grupo select:focus {
-  border-color: #0077cc;
-  box-shadow: 0 0 8px rgba(0, 119, 204, 0.5);
+  border-color: #009739; /* Color verde cuando se enfoca */
+  box-shadow: 0 0 10px rgba(0, 151, 73, 0.5); /* Sombra más fuerte al enfocar */
+  background-color: #ffffff; /* Fondo blanco al enfocar */
 }
+
+/* Estilo de los inputs tipo range (deslizadores) */
+.grupo input[type="range"] {
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.grupo input[type="range"]:focus {
+  background: #009739; /* Color verde cuando se enfoca */
+}
+
+.grupo input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #009739;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.grupo input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #009739;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Fondo sutil para cada grupo de filtros */
+.grupo {
+  background-color: #b1a1a1; /* Fondo claro para que se vea mejor separado */
+  padding: 15px;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera para dar profundidad */
+}
+
+/* Ajustes responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+  #filtros-contenido {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .grupo input,
+  .grupo select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .filtros {
+    gap: 15px;
+  }
+}
+
 
 /* ===== Estilos para los botones de filtros ===== */
 .btn-filtros {

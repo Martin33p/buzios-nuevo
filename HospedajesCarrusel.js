@@ -17,7 +17,7 @@ async function cargarHospedajesCarrusel() {
 
   const Hospedajes = parsed.data;
 
-  const tipoSelect = document.getElementById("tipoAlojamiento");
+  const tipoSelect = document.getElementById("tipoHospedajes");
   const estrellasSelect = document.getElementById("categoriaEstrellas");
   const swiperWrapper = document.querySelector(".swiper-wrapper");
   const verTodosBtn = document.getElementById("verTodosBtn");
