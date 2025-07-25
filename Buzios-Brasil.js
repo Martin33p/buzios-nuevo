@@ -35,9 +35,11 @@ function cargarImagenesHospedajes() {
           contenedor.appendChild(div);
         }
       });
+      inicializarModalImagen();
     })
     .catch(error => console.error("Error al cargar las imágenes de Hospedajes:", error));
 }
+
 
 function cargarGaleriaPlayas() {
   const spreadsheetId = "1zB-BbVoKArPHZa5QslG9XgPXNEM97c40jRIteOu25Po";
@@ -63,6 +65,7 @@ function cargarGaleriaPlayas() {
           contenedor.appendChild(div);
         }
       });
+      inicializarModalImagen();
     })
     .catch(error => console.error("Error al cargar las imágenes de Playas:", error));
 }
@@ -87,6 +90,15 @@ function cargarGaleriaActividades() {
           contenedor.appendChild(div);
         }
       });
+      inicializarModalImagen();
     })
     .catch(error => console.error("Error al cargar las imágenes de Actividades:", error));
 }
+window.inicializarModalImagen = function () {
+  document.querySelectorAll('.galeria-Hospedajes img').forEach(img => {
+    img.addEventListener('click', () => {
+      imagenAmpliada.src = img.src;
+      modal.style.display = 'flex';
+    });
+  });
+};

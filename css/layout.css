@@ -118,7 +118,7 @@ h3 {
   box-shadow: 0 6px 18px rgba(242, 6, 6, 0.1); /* Sombra más pronunciada */
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Mayor separación entre los grupos de filtros */
+  gap: 10px; /* Mayor separación entre los grupos de filtros */
 }
 
 /* Estilos para el contenedor de filtros cuando se activa */

@@ -302,114 +302,109 @@
     const params = new URLSearchParams(window.location.search);
     const idPosada = params.get("id");
 
-    
-
     // Función para cargar los datos de la posada desde el CSV
-    async function cargarPosada() {
-      const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
-      
-      const response = await fetch(urlCSV);
-      if (!response.ok) {
-        console.error("No se pudo cargar el archivo CSV:", response.status);
-        return;
+async function cargarPosada() {
+  const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
+  
+  const response = await fetch(urlCSV);
+  if (!response.ok) {
+    console.error("No se pudo cargar el archivo CSV:", response.status);
+    return;
+  }
+
+  const csvText = await response.text();
+  const parsed = Papa.parse(csvText, {
+    header: true,
+    skipEmptyLines: true
+  });
+
+  const Hospedajes = parsed.data;
+  const posada = Hospedajes.find(item => item.ID === idPosada);
+
+  if (posada) {
+    // Cargar los datos en la página
+    document.getElementById("nombre-posada").textContent = posada.Nombre;
+    document.getElementById("tipo-hospedaje").textContent = posada["Tipo de hospedaje"];
+    document.getElementById("direccion").textContent = posada.Dirección;
+    document.getElementById("estrellas").textContent = "⭐".repeat(parseInt(posada.Estrellas));
+    document.getElementById("precio").textContent = posada.Precio;
+    document.getElementById("dormitorios").textContent = posada.Dormitorios;
+    document.getElementById("camas").textContent = posada.Camas;
+    document.getElementById("checkin").textContent = posada.CheckIn;
+    document.getElementById("checkout").textContent = posada.CheckOut;
+    document.getElementById("internet").textContent = posada.Internet;
+    document.getElementById("aire").textContent = posada.Aire;
+    document.getElementById("tv").textContent = posada.TV;
+
+    // Verificar que "Más_Info" esté disponible antes de asignarlo
+    const masInfo = posada["Más_Info"] || "Información no disponible"; // Si no existe, muestra un texto por defecto
+    document.getElementById("mas-info").textContent = masInfo;
+
+    // Cargar imágenes en el collage
+    const collageImagenes = document.getElementById("collage-imagenes");
+    for (let i = 1; i <= 10; i++) {
+      const imagenUrl = posada[`Imagen${i}_URL`];
+      if (imagenUrl) {
+        const image = document.createElement('img');
+        image.src = imagenUrl;
+        image.alt = `Imagen ${i}`;
+        image.onclick = () => openModal(imagenUrl);
+        collageImagenes.appendChild(image);
       }
+    }
 
-      const csvText = await response.text();
-      const parsed = Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true
-      });
-
-      const Hospedajes = parsed.data;
-      const posada = Hospedajes.find(item => item.ID === idPosada);
-
-      if (posada) {
-        // Cargar los datos en la página
-        document.getElementById("nombre-posada").textContent = posada.Nombre;
-        document.getElementById("tipo-hospedaje").textContent = posada["Tipo de hospedaje"];
-        document.getElementById("direccion").textContent = posada.Dirección;
-        document.getElementById("estrellas").textContent = "⭐".repeat(parseInt(posada.Estrellas));
-        document.getElementById("precio").textContent = posada.Precio;
-        document.getElementById("dormitorios").textContent = posada.Dormitorios;
-        document.getElementById("camas").textContent = posada.Camas;
-        document.getElementById("checkin").textContent = posada.CheckIn;
-        document.getElementById("checkout").textContent = posada.CheckOut;
-        document.getElementById("internet").textContent = posada.Internet;
-        document.getElementById("aire").textContent = posada.Aire;
-        document.getElementById("tv").textContent = posada.TV;
-
-        // Cargar Más Info
-        document.getElementById("mas-info").textContent = posada["Más_Info"];  // Aquí obtenemos los datos de la columna U
-
-        // Cargar imágenes en el collage
-        const collageImagenes = document.getElementById("collage-imagenes");
-        for (let i = 1; i <= 10; i++) {
-          const imagenUrl = posada[`Imagen${i}_URL`];
-          if (imagenUrl) {
-            const image = document.createElement('img');
-            image.src = imagenUrl;
-            image.alt = `Imagen ${i}`;
-            image.onclick = () => openModal(imagenUrl);
-            collageImagenes.appendChild(image);
-          }
+    // Cargar videos debajo del collage de imágenes
+    const videos = document.getElementById("videos");
+    const videoUrls = [posada.Video_URL, posada.Video_URL2];
+    videoUrls.forEach(videoUrl => {
+      if (videoUrl) {
+        const videoID = extraerIDYoutube(videoUrl);
+        if (videoID) {
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
+          iframe.frameborder = "0";
+          iframe.allowfullscreen = true;
+          videos.appendChild(iframe);
         }
-
-        // Cargar videos debajo del collage de imágenes
-        const videos = document.getElementById("videos");
-        const videoUrls = [posada.Video_URL, posada.Video_URL2];
-        videoUrls.forEach(videoUrl => {
-  if (videoUrl) {
-    const videoID = extraerIDYoutube(videoUrl);
-    if (videoID) {
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
-      
-      // Añadir permisos adecuados para el iframe
-      iframe.allow = "autoplay; encrypted-media; fullscreen"; // Asegura que fullscreen esté habilitado
-      iframe.frameborder = "0";
-      iframe.allowfullscreen = true; // Este atributo es esencial para permitir la pantalla completa
-      
-      videos.appendChild(iframe);
-    }
-  }
-});
-      } else {
-        document.getElementById("nombre-posada").textContent = "Posada no encontrada";
       }
-    }
-
- // Función para abrir el modal
-function openModal(url) {
-  const modal = document.getElementById('myModal');
-  const modalContent = document.querySelector('.modal-content');
-  
-  if (url.includes('youtube')) {
-    modalContent.innerHTML = ` 
-      <iframe width="100%" height="100%" 
-        src="${url}?autoplay=1&mute=1&loop=1&playlist=${url}&controls=1&modestbranding=1&rel=0" 
-        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-      </iframe>`;
-  } else {
-    modalContent.innerHTML = `<img src="${url}" alt="Imagen grande">`;
-  }
-  
-  // Abrir el modal
-  modal.style.display = 'flex';
-
-  // Cerrar el modal con un clic en la imagen
-  const modalImage = modalContent.querySelector('img');
-  if (modalImage) {
-    modalImage.addEventListener('click', () => {
-      modal.style.display = 'none'; // Cerrar el modal al hacer clic en la imagen
     });
+  } else {
+    document.getElementById("nombre-posada").textContent = "Posada no encontrada";
   }
 }
 
-// Función para cerrar el modal
-document.querySelector('.close').addEventListener('click', function() {
-  const modal = document.getElementById('myModal');
-  modal.style.display = 'none';
-});
+    // Función para abrir el modal
+    function openModal(url) {
+      const modal = document.getElementById('myModal');
+      const modalContent = document.querySelector('.modal-content');
+      
+      if (url.includes('youtube')) {
+        modalContent.innerHTML = ` 
+          <iframe width="100%" height="100%" 
+            src="${url}?autoplay=1&mute=1&loop=1&playlist=${url}&controls=1&modestbranding=1&rel=0" 
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+          </iframe>`;
+      } else {
+        modalContent.innerHTML = `<img src="${url}" alt="Imagen grande">`;
+      }
+      
+      // Abrir el modal
+      modal.style.display = 'flex';
+
+      // Cerrar el modal con un clic en la imagen
+      const modalImage = modalContent.querySelector('img');
+      if (modalImage) {
+        modalImage.addEventListener('click', () => {
+          modal.style.display = 'none'; // Cerrar el modal al hacer clic en la imagen
+        });
+      }
+    }
+
+    // Función para cerrar el modal
+    document.querySelector('.close').addEventListener('click', function() {
+      const modal = document.getElementById('myModal');
+      modal.style.display = 'none';
+    });
 
 
     // Cargar la información cuando el documento esté listo
@@ -420,14 +415,15 @@ document.querySelector('.close').addEventListener('click', function() {
       const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
       return match ? match[1] : null;
     }
+
     window.addEventListener('DOMContentLoaded', () => {
-    fetch("footer.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("footer").innerHTML = data;
-      })
-      .catch(error => console.error("Error al cargar el footer:", error));
-  });
+      fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.error("Error al cargar el footer:", error));
+    });
   </script>
 
 </body>

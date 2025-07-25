@@ -81,8 +81,7 @@
 
         data.forEach(act => {
           const videoID = extraerIDYoutube(act["Video 1"]);
-          const videoHTML = videoID ? `<iframe src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0" frameborder="0" allowfullscreen></iframe>` : "";
-
+          const videoHTML = videoID ? `<iframe src="https://www.youtube.com/embed/${videoID}?controls=1&rel=0&loop=1&playlist=${videoID}&autoplay=1" frameborder="0" allowfullscreen></iframe>` : "";
           const tarjeta = document.createElement("div");
           tarjeta.classList.add("swiper-slide");
           tarjeta.innerHTML = `
