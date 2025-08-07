@@ -96,9 +96,9 @@
     height: 28px;
   }
   .flag {
-    width: 14px;
-    height: 9px;
-    top: -4px;
-    right: -4px;
+    width: 18px;    /* antes 14px, más grande */
+    height: 12px;   /* antes 9px, más alto */
+    top: -6px;      /* ajustamos un poco para que siga pegada */
+    right: -6px;    /* igual que arriba */
   }
 }
