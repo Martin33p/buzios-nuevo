@@ -30,4 +30,32 @@
     height: 50vh;
   }
   }
- 
+ @media (max-width: 768px) {
+  .flag {
+    width: 20px;    /* un toque más grande que en 480px */
+    height: 14px;
+    top: -7px;
+    right: -7px;
+  }
+  
+  /* Ajustamos también el icon-wrapper para que no quede raro */
+  .icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Si querés, un toque más grande el botón también */
+  .whatsapp-button {
+    width: 60px;
+    height: 60px;
+    right: 20px;
+  }
+  
+  /* Ajustes en posición para que no se monten */
+  #whatsapp-arg {
+    bottom: 110px;
+  }
+  #whatsapp-br {
+    bottom: 40px;
+  }
+}
