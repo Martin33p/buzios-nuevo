@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Posada - World Travel Turismo</title>
 
- <!-- Estilos CSS -->
+  <!-- Estilos CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/navegacion.css">
@@ -117,54 +117,127 @@
     .videos iframe:hover {
       transform: scale(1.05);
     }
+
+    /* Más Información */
     .mas-info {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(9, 9, 9, 0.992);
-  margin-bottom: 30px; /* Aumenta este valor para más separación */
-}
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(9, 9, 9, 0.992);
+      margin-bottom: 30px;
+      color: #0b0c0c;
+      font-size: 16px;
+    }
 
     /* Modal para imágenes */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* Elimina el desplazamiento del modal */
-}
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden; /* Elimina el desplazamiento del modal */
+    }
 
-.modal-content {
-  width: auto;
-  height: 90%; /* Limita el alto del modal al 90% del alto de la pantalla */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .modal-content {
+      width: auto;
+      height: 90%; /* Limita el alto del modal al 90% del alto de la pantalla */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* Ajustamos las imágenes dentro del modal */
-.modal img {
-  height: 100%; /* La altura máxima es el 100% del modal */
-  width: auto;  /* Ajustamos el ancho proporcionalmente */
-  object-fit: contain; /* Mantiene la proporción sin distorsionar ni cortar */
-  cursor: pointer;
-}
+    /* Ajustamos las imágenes dentro del modal */
+    .modal img {
+      height: 100%; /* La altura máxima es el 100% del modal */
+      width: auto;  /* Ajustamos el ancho proporcionalmente */
+      object-fit: contain; /* Mantiene la proporción sin distorsionar ni cortar */
+      cursor: pointer;
+    }
 
-/* Estilo para el botón de cerrar */
-.close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
-}
+    /* Estilo para el botón de cerrar */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Carrito de compras */
+    .cart-icon {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background-color: #f7c600;
+      color: #002776;
+      border-radius: 50%;
+      padding: 15px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 100;
+    }
+
+    .cart-icon:hover {
+      background-color: #009739;
+      color: white;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    /* Carrito desplegable */
+    .cart-dropdown {
+      display: none;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
+      z-index: 99;
+    }
+
+    #cart-items {
+      margin-bottom: 20px;
+    }
+
+    #cart-total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #checkout-btn {
+      background-color: #f7c600;
+      color: #002776;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    #checkout-btn:hover {
+      background-color: #009739;
+      color: white;
+    }
 
     /* Responsividad */
     @media (max-width: 768px) {
@@ -188,21 +261,27 @@
 </head>
 <body>
 
- <header id="header">
-  <!-- Logo -->
-  <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo" />
-  
-  <!-- Menú -->
-  <div class="menu">
-    <ul>
-      <li><a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
-      <li><a href="hospedaje.html"><i class="fas fa-bed"></i><span>Hospedajes</span></a></li>
-      <li><a href="mapa.html"><i class="fas fa-map-marker-alt"></i><span>Playas</span></a></li>
-      <li><a href="actividades.html"><i class="fa fa-person-walking"></i><span>Actividades</span></a></li>
-      <li><a href="contacto.html"><i class="fas fa-phone-alt"></i><span>Contacto</span></a></li>
-    </ul>
+  <header id="header">
+    <!-- Logo -->
+    <img src="imagen/Logotipo.png" alt="Logo de World Travel Turismo" class="logo" />
+
+    <!-- Menú -->
+    <div class="menu">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+        <li><a href="hospedaje.html"><i class="fas fa-bed"></i><span>Hospedajes</span></a></li>
+        <li><a href="mapa.html"><i class="fas fa-map-marker-alt"></i><span>Playas</span></a></li>
+        <li><a href="actividades.html"><i class="fa fa-person-walking"></i><span>Actividades</span></a></li>
+        <li><a href="contacto.html"><i class="fas fa-phone-alt"></i><span>Contacto</span></a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Icono del carrito en la esquina superior derecha -->
+  <div id="cart-icon" class="cart-icon">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count" class="cart-count">0</span> <!-- Aquí se mostrará la cantidad de productos en el carrito -->
   </div>
-</header>
 
   <div class="contenedor-posada">
     <h1 id="nombre-posada"></h1>
@@ -266,11 +345,9 @@
       </div>
     </div>
 
-    <!-- Más Información (abajo del cuadro de datos y antes de las imágenes) -->
+    <!-- Más Información -->
     <div class="mas-info">
-      <h2>Más Información</h2>
       <p id="mas-info"></p>
-     
     </div>
 
     <!-- Collage de imágenes -->
@@ -282,8 +359,6 @@
     <div class="videos" id="videos">
       <!-- Los videos se cargarán dinámicamente aquí -->
     </div>
-
-    
   </div>
 
   <!-- Modal para imágenes -->
@@ -293,7 +368,17 @@
       <!-- Aquí se cargará la imagen en pantalla completa -->
     </div>
   </div>
-<div id="footer"></div>
+
+  <!-- Carrito de compras desplegable -->
+  <div id="cart-dropdown" class="cart-dropdown">
+    <h3>Tu carrito</h3>
+    <div id="cart-items"></div> <!-- Aquí se agregarán los productos -->
+    <div id="cart-total"></div> <!-- Aquí se mostrará el total -->
+    <button id="checkout-btn">Finalizar Compra</button>
+  </div>
+
+  <div id="footer"></div>
+
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
@@ -303,75 +388,75 @@
     const idPosada = params.get("id");
 
     // Función para cargar los datos de la posada desde el CSV
-async function cargarPosada() {
-  const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
-  
-  const response = await fetch(urlCSV);
-  if (!response.ok) {
-    console.error("No se pudo cargar el archivo CSV:", response.status);
-    return;
-  }
+    async function cargarPosada() {
+      const urlCSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRL9Z79Drl1elK-ZvDBK50V61OL8BXbKu9zEGF61WlzrR5aShOXtetnLV-zIENQbmEO9t0kMAxANr9i/pub?gid=0&single=true&output=csv';
 
-  const csvText = await response.text();
-  const parsed = Papa.parse(csvText, {
-    header: true,
-    skipEmptyLines: true
-  });
+      const response = await fetch(urlCSV);
+      if (!response.ok) {
+        console.error("No se pudo cargar el archivo CSV:", response.status);
+        return;
+      }
 
-  const Hospedajes = parsed.data;
-  const posada = Hospedajes.find(item => item.ID === idPosada);
+      const csvText = await response.text();
+      const parsed = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true
+      });
 
-  if (posada) {
-    // Cargar los datos en la página
-    document.getElementById("nombre-posada").textContent = posada.Nombre;
-    document.getElementById("tipo-hospedaje").textContent = posada["Tipo de hospedaje"];
-    document.getElementById("direccion").textContent = posada.Dirección;
-    document.getElementById("estrellas").textContent = "⭐".repeat(parseInt(posada.Estrellas));
-    document.getElementById("precio").textContent = posada.Precio;
-    document.getElementById("dormitorios").textContent = posada.Dormitorios;
-    document.getElementById("camas").textContent = posada.Camas;
-    document.getElementById("checkin").textContent = posada.CheckIn;
-    document.getElementById("checkout").textContent = posada.CheckOut;
-    document.getElementById("internet").textContent = posada.Internet;
-    document.getElementById("aire").textContent = posada.Aire;
-    document.getElementById("tv").textContent = posada.TV;
+      const Hospedajes = parsed.data;
+      const posada = Hospedajes.find(item => item.ID === idPosada);
 
-    // Verificar que "Más_Info" esté disponible antes de asignarlo
-    const masInfo = posada["Más_Info"] || "Información no disponible"; // Si no existe, muestra un texto por defecto
-    document.getElementById("mas-info").textContent = masInfo;
+      if (posada) {
+        // Cargar los datos en la página
+        document.getElementById("nombre-posada").textContent = posada.Nombre;
+        document.getElementById("tipo-hospedaje").textContent = posada["Tipo de hospedaje"];
+        document.getElementById("direccion").textContent = posada.Dirección;
+        document.getElementById("estrellas").textContent = "⭐".repeat(parseInt(posada.Estrellas));
+        document.getElementById("precio").textContent = posada.Precio;
+        document.getElementById("dormitorios").textContent = posada.Dormitorios;
+        document.getElementById("camas").textContent = posada.Camas;
+        document.getElementById("checkin").textContent = posada.CheckIn;
+        document.getElementById("checkout").textContent = posada.CheckOut;
+        document.getElementById("internet").textContent = posada.Internet;
+        document.getElementById("aire").textContent = posada.Aire;
+        document.getElementById("tv").textContent = posada.TV;
 
-    // Cargar imágenes en el collage
-    const collageImagenes = document.getElementById("collage-imagenes");
-    for (let i = 1; i <= 10; i++) {
-      const imagenUrl = posada[`Imagen${i}_URL`];
-      if (imagenUrl) {
-        const image = document.createElement('img');
-        image.src = imagenUrl;
-        image.alt = `Imagen ${i}`;
-        image.onclick = () => openModal(imagenUrl);
-        collageImagenes.appendChild(image);
+        // Verificar que "Más_Info" esté disponible antes de asignarlo
+        const masInfo = posada["Más_Info"] || "Información no disponible"; // Si no existe, muestra un texto por defecto
+        document.getElementById("mas-info").textContent = masInfo;
+
+        // Cargar imágenes en el collage
+        const collageImagenes = document.getElementById("collage-imagenes");
+        for (let i = 1; i <= 10; i++) {
+          const imagenUrl = posada[`Imagen${i}_URL`];
+          if (imagenUrl) {
+            const image = document.createElement('img');
+            image.src = imagenUrl;
+            image.alt = `Imagen ${i}`;
+            image.onclick = () => openModal(imagenUrl);
+            collageImagenes.appendChild(image);
+          }
+        }
+
+        // Cargar videos debajo del collage de imágenes
+        const videos = document.getElementById("videos");
+        const videoUrls = [posada.Video_URL, posada.Video_URL2];
+        videoUrls.forEach(videoUrl => {
+          if (videoUrl) {
+            const videoID = extraerIDYoutube(videoUrl);
+            if (videoID) {
+              const iframe = document.createElement('iframe');
+              iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
+              iframe.frameborder = "0";
+              iframe.allowfullscreen = true;
+              videos.appendChild(iframe);
+            }
+          }
+        });
+      } else {
+        document.getElementById("nombre-posada").textContent = "Posada no encontrada";
       }
     }
-
-    // Cargar videos debajo del collage de imágenes
-    const videos = document.getElementById("videos");
-    const videoUrls = [posada.Video_URL, posada.Video_URL2];
-    videoUrls.forEach(videoUrl => {
-      if (videoUrl) {
-        const videoID = extraerIDYoutube(videoUrl);
-        if (videoID) {
-          const iframe = document.createElement('iframe');
-          iframe.src = `https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}&controls=1&modestbranding=1&rel=0`;
-          iframe.frameborder = "0";
-          iframe.allowfullscreen = true;
-          videos.appendChild(iframe);
-        }
-      }
-    });
-  } else {
-    document.getElementById("nombre-posada").textContent = "Posada no encontrada";
-  }
-}
 
     // Función para abrir el modal
     function openModal(url) {
@@ -379,8 +464,8 @@ async function cargarPosada() {
       const modalContent = document.querySelector('.modal-content');
       
       if (url.includes('youtube')) {
-        modalContent.innerHTML = ` 
-          <iframe width="100%" height="100%" 
+        modalContent.innerHTML =  
+          `<iframe width="100%" height="100%" 
             src="${url}?autoplay=1&mute=1&loop=1&playlist=${url}&controls=1&modestbranding=1&rel=0" 
             frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
           </iframe>`;
@@ -388,10 +473,8 @@ async function cargarPosada() {
         modalContent.innerHTML = `<img src="${url}" alt="Imagen grande">`;
       }
       
-      // Abrir el modal
       modal.style.display = 'flex';
 
-      // Cerrar el modal con un clic en la imagen
       const modalImage = modalContent.querySelector('img');
       if (modalImage) {
         modalImage.addEventListener('click', () => {
@@ -406,7 +489,6 @@ async function cargarPosada() {
       modal.style.display = 'none';
     });
 
-
     // Cargar la información cuando el documento esté listo
     document.addEventListener("DOMContentLoaded", cargarPosada);
 
@@ -416,6 +498,7 @@ async function cargarPosada() {
       return match ? match[1] : null;
     }
 
+    // Footer
     window.addEventListener('DOMContentLoaded', () => {
       fetch("footer.html")
         .then(res => res.text())

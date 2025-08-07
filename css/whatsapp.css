@@ -1,0 +1,104 @@
+.whatsapp-button {
+  position: fixed;
+  right: 25px;
+  background-color: #25D366;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    0 8px 15px rgba(37, 211, 102, 0.3),
+    0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+              transform 0.25s ease;
+}
+
+/* Posición vertical para no pisarse */
+#whatsapp-arg {
+  bottom: 100px;
+}
+
+#whatsapp-br {
+  bottom: 25px;
+}
+
+/* Contenedor para el SVG y la banderita */
+.icon-wrapper {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+/* Estilo del ícono SVG para que tome todo el contenedor */
+.icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  fill: white;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+  transition: filter 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  background-color: #1ebe57;
+  box-shadow:
+    0 12px 20px rgba(37, 211, 102, 0.5),
+    0 6px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.whatsapp-button:hover svg {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+}
+
+/* Banderita pequeña en la esquina superior derecha */
+.flag {
+  position: absolute;
+  top: -8px;       /* Bajamos un poco para que no se salga del borde */
+  right: -8px;     /* Lo mismo a la derecha */
+  width: 30px;     /* Más ancho */
+  height: 23px;    /* Más alto */
+  border: 1.5px solid white;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.3);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+/* Bandera Argentina */
+.flag-arg {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg');
+}
+
+/* Bandera Brasil */
+.flag-br {
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/0/05/Flag_of_Brazil.svg');
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .whatsapp-button {
+    width: 55px;
+    height: 55px;
+    right: 15px;
+  }
+  #whatsapp-arg {
+    bottom: 85px;
+  }
+  #whatsapp-br {
+    bottom: 15px;
+  }
+  .icon-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+  .flag {
+    width: 14px;
+    height: 9px;
+    top: -4px;
+    right: -4px;
+  }
+}
